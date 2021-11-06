@@ -1,0 +1,33 @@
+name: Deploy Website to GitHub Pages
+
+on: push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Website
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set Up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+          architecture: x64
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Build Website
+        run: |
+          mkdocs build
+      - name: Push Build Website to gh-pages Branch
+        run: |
+          git config --global user.name 'Hongnan G.'
+          git config --global user.email 'ghnreigns@users.noreply.github.com'
+          ghp-import \
+          --no-jekyll \
+          --force \
+          --no-history \
+          --push \
+          --message "Deploying ${{ github.sha }}" \
+          site

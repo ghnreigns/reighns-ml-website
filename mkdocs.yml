@@ -1,0 +1,31 @@
+site_name: Hongnan G. Machine Learning Projects
+site_url: https://ghnreigns.github.io/reighns-ml-journey # change ghnreighns to reigHns92 for my new github acc
+nav:
+  - Home: index.md
+  - About: about.md
+  - Getting Started: getting_started.md
+  - Machine Learning Metrics: metrics/classification_metrics.md
+  - Notebooks: notebooks_list.md
+  - Deep Learning with PyTorch:
+    - Computer Vision:
+      - Image: deep_learning/computer_vision/image.md
+theme:
+  name: material
+markdown_extensions:
+  - admonition
+  - footnotes
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.arithmatex:
+      generic: true
+plugins:
+  - mkdocs-jupyter:
+      execute: False
+      ignore_h1_titles: True
+      kernel_name: python3
+extra_javascript:
+  - javascript/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
