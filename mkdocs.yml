@@ -4,7 +4,11 @@ nav:
   - Home: index.md
   - About: about.md
   - Getting Started: getting_started.md
-  - Machine Learning Metrics: metrics/classification_metrics.md
+  - Machine Learning Metrics: 
+    - Classification:
+      - Introduction: metrics/classification_metrics.md
+      - Accuracy: metrics/accuracy.md
+      - Confusion Matrix: metrics/confusion_matrix.md
   - Notebooks: notebooks_list.md
   - Deep Learning with PyTorch:
     - Computer Vision:
@@ -18,6 +22,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.superfences
   - pymdownx.snippets
+  - pymdownx.details
   - pymdownx.arithmatex:
       generic: true
 plugins:
