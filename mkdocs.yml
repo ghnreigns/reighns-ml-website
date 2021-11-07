@@ -9,7 +9,7 @@ nav:
       - Introduction: metrics/classification_metrics.md
       - Accuracy: metrics/accuracy.md
       - Confusion Matrix: metrics/confusion_matrix.md
-  - Notebooks: notebooks_list.md
+      - Precision-Recall-F1: metrics/precision_recall_f1.md
   - Deep Learning with PyTorch:
     - Computer Vision:
       - Image: deep_learning/computer_vision/image.md

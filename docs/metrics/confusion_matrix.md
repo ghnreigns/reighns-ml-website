@@ -1,5 +1,5 @@
 ```python
-!pip install -q scikit-learn==1.0.1
+# !pip install -q scikit-learn==1.0.1
 from typing import List
 
 import matplotlib.pyplot as plt
@@ -152,7 +152,13 @@ We input the `labels=["benign", "malignant"]` to indicate that malignant is trea
 
 
 ```python
-def plot_confusion_matrix(y_true: np.ndarray, y_pred: np.ndarray, title: str, tick_labels: List[str]) -> None:
+def plot_confusion_matrix(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    title: str,
+    labels: List[str],
+    tick_labels: List[str],
+) -> None:
     """Plots a Binary Confusion Matrix.
 
     Args:
@@ -163,7 +169,9 @@ def plot_confusion_matrix(y_true: np.ndarray, y_pred: np.ndarray, title: str, ti
     """
 
     # Unravel into tn, fp, fn and tp
-    tn, fp, fn, tp = metrics.confusion_matrix(y_true, y_pred, labels=tick_labels).ravel()
+    tn, fp, fn, tp = metrics.confusion_matrix(
+        y_true, y_pred, labels=labels
+    ).ravel()
 
     # reshape into tp, fp, fn, tn - this is personal preference
     reshaped_cm = np.asarray([[tp, fp], [fn, tn]])
@@ -171,12 +179,30 @@ def plot_confusion_matrix(y_true: np.ndarray, y_pred: np.ndarray, title: str, ti
     # flatten this 2d array
     cm_flattened = reshaped_cm.flatten()
 
-    labels = ["True Positive", "False Positive", "False Negative", "True Negative"]
-    annot = (np.asarray([f"{label}\n{cm_count}" for label, cm_count in zip(labels, cm_flattened)])).reshape(2, 2)
+    labels = [
+        "True Positive",
+        "False Positive",
+        "False Negative",
+        "True Negative",
+    ]
+    annot = (
+        np.asarray(
+            [
+                f"{label}\n{cm_count}"
+                for label, cm_count in zip(labels, cm_flattened)
+            ]
+        )
+    ).reshape(2, 2)
 
     ax = plt.subplot()
     heatmap = sns.heatmap(
-        reshaped_cm, annot=annot, fmt="", cmap="Greens", ax=ax, xticklabels=tick_labels, yticklabels=tick_labels
+        reshaped_cm,
+        annot=annot,
+        fmt="",
+        cmap="Greens",
+        ax=ax,
+        xticklabels=tick_labels,
+        yticklabels=tick_labels,
     )
     ax.set_title(title)
     ax.set_xlabel("Predicted labels")
@@ -189,8 +215,20 @@ def plot_confusion_matrix(y_true: np.ndarray, y_pred: np.ndarray, title: str, ti
 y_true = tumour.actual_y
 y_pred = tumour.predicted_y
 
-plot_confusion_matrix(y_true, y_pred,title='Confusion Matrix (Malignant as +)', tick_labels = ['benign', 'malignant']);
-plot_confusion_matrix(y_true, y_pred,title='Confusion Matrix (Benign as +)', tick_labels = ['malignant', 'benign']);
+plot_confusion_matrix(
+    y_true,
+    y_pred,
+    title="Confusion Matrix (Malignant as +)",
+    labels=["benign", "malignant"],
+    tick_labels=["benign", "malignant"],
+)
+plot_confusion_matrix(
+    y_true,
+    y_pred,
+    title="Confusion Matrix (Benign as +)",
+    labels=["malignant", "benign"],
+    tick_labels=["malignant", "benign"],
+)
 ```
 
 
@@ -228,15 +266,17 @@ $$2 * 10000 - 3 * 10000 - 1 * 1000 - 3 * 100$$
 ```python
 def confusion_matrix_(y_true: np.ndarray, y_pred: np.ndarray) -> np.ndarray:
     """Calculates the confusion matrix.
-
-    This can be used in both binary and multiclass classification provided that we label binarized the multiclass labels.
+    We assume that the inputs are binarized already.
+    This can be used in both binary and multiclass classification
+    provided that we label binarized the multiclass labels.
 
     Args:
         y_true (np.ndarray): the correct labels, shape (n_samples, )
         y_pred (np.ndarray): the predicted labels, shape (n_samples, )
 
     Returns:
-        cm (np.ndarray): the confusion matrix, shape (n_classes, n_classes) with tp, fp, fn, tn in each row
+        cm (np.ndarray): the confusion matrix, shape (n_classes, n_classes)
+                         with [[tp, fp], [fn, tn]]
     """
     tp, fp, fn, tn = 0, 0, 0, 0
 
@@ -267,10 +307,13 @@ tp, fp, fn, tn = confusion_matrix_(y_true, y_pred).ravel()
 print("Outcome values : \n", tp, fn, fp, tn)
 print("Outcome values : \n", confusion_matrix_(y_true, y_pred))
 
-# We can check against `sklearn`.
-# confusion matrix, set positive class to be positive 1, note the position is different from mine, sklearn uses
+# We can check against `sklearn`'s confusion matrix, set positive class to be positive 1.
+# Note it returns tn, fp, fn and tp and not tp, fp, fn and tn.
 tn, fp, fn, tp = metrics.confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
-print("Confusion matrix : \n", metrics.confusion_matrix(y_true, y_pred, labels=[0, 1]))
+print(
+    "Confusion matrix : \n",
+    metrics.confusion_matrix(y_true, y_pred, labels=[0, 1]),
+)
 print("Outcome values : \n", tp, fn, fp, tn)
 ```
 
@@ -308,38 +351,42 @@ print("Outcome values : \n", tp, fn, fp, tn)
 
 
 ```python
-def plot_confusion_matrix(cm, classes,
-                          normalize=False,
-                          title='Confusion matrix',
-                          cmap=plt.cm.Greens):
+def plot_multiclass_confusion_matrix(
+    cm, classes, normalize=False, title="Confusion matrix", cmap=plt.cm.Greens
+):
     """
-    Reference: https://datascience.stackexchange.com/questions/40067/confusion-matrix-three-classes-python 
+    Reference: https://datascience.stackexchange.com/questions/40067/
+               confusion-matrix-three-classes-python
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
     """
-    
+
     if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        cm = cm.astype("float") / cm.sum(axis=1)[:, np.newaxis]
         print("Normalized confusion matrix")
     else:
-        print('Confusion matrix, without normalization')
+        print("Confusion matrix, without normalization")
 
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.imshow(cm, interpolation="nearest", cmap=cmap)
     plt.title(title)
     plt.colorbar()
     tick_marks = np.arange(len(classes))
     plt.xticks(tick_marks, classes, rotation=45)
     plt.yticks(tick_marks, classes)
 
-    fmt = '.2f' if normalize else 'd'
-    thresh = cm.max() / 2.
+    fmt = ".2f" if normalize else "d"
+    thresh = cm.max() / 2.0
     for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, format(cm[i, j], fmt),
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
+        plt.text(
+            j,
+            i,
+            format(cm[i, j], fmt),
+            horizontalalignment="center",
+            color="white" if cm[i, j] > thresh else "black",
+        )
 
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
+    plt.ylabel("True label")
+    plt.xlabel("Predicted label")
     plt.tight_layout()
 ```
 
@@ -347,8 +394,12 @@ def plot_confusion_matrix(cm, classes,
 ```python
 y_true = tumour_multiclass.actual_y
 y_pred = tumour_multiclass.predicted_y
-cm_multiclass = metrics.confusion_matrix(y_true, y_pred)
-plot_confusion_matrix(cm_multiclass, classes = ['benign', 'borderline', 'malignant'])
+cm_multiclass = metrics.confusion_matrix(
+    y_true, y_pred, labels=["benign", "borderline", "malignant"]
+)
+plot_multiclass_confusion_matrix(
+    cm_multiclass, classes=["benign", "borderline", "malignant"]
+)
 ```
 
     Confusion matrix, without normalization
