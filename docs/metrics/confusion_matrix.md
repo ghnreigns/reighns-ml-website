@@ -11,73 +11,72 @@ import itertools
 ```
 
 
-??? note "data"
-    ```python
-    d = {
-        "index": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "predicted_y": [
-            "malignant",
-            "malignant",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "malignant",
-        ],
-        "actual_y": [
-            "malignant",
-            "malignant",
-            "malignant",
-            "malignant",
-            "malignant",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-        ],
-    }
-    tumour = pd.DataFrame(data=d)
+```python
+d = {
+    "index": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "predicted_y": [
+        "malignant",
+        "malignant",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "malignant",
+    ],
+    "actual_y": [
+        "malignant",
+        "malignant",
+        "malignant",
+        "malignant",
+        "malignant",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+    ],
+}
+tumour = pd.DataFrame(data=d)
 
 
-    d = {
-        "index": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        "predicted_y": [
-            "malignant",
-            "malignant",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "malignant",
-            "borderline",
-            "borderline"
-        ],
-        "actual_y": [
-            "malignant",
-            "malignant",
-            "malignant",
-            "malignant",
-            "malignant",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "benign",
-            "borderline",
-            "malignant"
-        ],
-    }
-    tumour_multiclass = pd.DataFrame(data=d)
+d = {
+    "index": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    "predicted_y": [
+        "malignant",
+        "malignant",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "malignant",
+        "borderline",
+        "borderline"
+    ],
+    "actual_y": [
+        "malignant",
+        "malignant",
+        "malignant",
+        "malignant",
+        "malignant",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "benign",
+        "borderline",
+        "malignant"
+    ],
+}
+tumour_multiclass = pd.DataFrame(data=d)
 
-    # tumour_multiclass.to_markdown(index=False)
-    ```
+# tumour_multiclass.to_markdown(index=False)
+```
 
 ## Confusion Matrix
 
@@ -90,18 +89,18 @@ Before we move on to give the definition of Confusion Matrix, we need to underst
 
 
 
-| index | predicted_y | actual_y  |
-| ----: | :---------- | :-------- |
-|     1 | malignant   | malignant |
-|     2 | malignant   | malignant |
-|     3 | benign      | malignant |
-|     4 | benign      | malignant |
-|     5 | benign      | malignant |
-|     6 | benign      | benign    |
-|     7 | benign      | benign    |
-|     8 | benign      | benign    |
-|     9 | benign      | benign    |
-|    10 | malignant   | benign    |
+|   index | predicted_y   | actual_y   |
+|--------:|:--------------|:-----------|
+|       1 | malignant     | malignant  |
+|       2 | malignant     | malignant  |
+|       3 | benign        | malignant  |
+|       4 | benign        | malignant  |
+|       5 | benign        | malignant  |
+|       6 | benign        | benign     |
+|       7 | benign        | benign     |
+|       8 | benign        | benign     |
+|       9 | benign        | benign     |
+|      10 | malignant     | benign     |
 
 ### True Positive (TP)
 
@@ -131,8 +130,8 @@ Before we move on to give the definition of Confusion Matrix, we need to underst
     In binary classification, a confusion matrix is a $2 \times 2$ matrix[^1] which reports the number of false positives, false negatives, true positives, and true negatives. Conventionally, the matrix's first row is made up of TP and FP while the second row is made up of FN and TN.
   
 <figure>
-    <img src='https://storage.googleapis.com/reighns/reighns_ml_projects/docs/metrics/classification_metrics/confusion_matrix.jpg' width="200" height="200"/>
-    <figcaption>Basic Confusion Matrix, courtesy of Analytics Vidhya.</figcaption>
+    <img src='https://storage.googleapis.com/reighns/reighns_ml_projects/docs/metrics/classification_metrics/binary_confusion_matrix.PNG'/>
+    <figcaption>Binary Confusion Matrix, by Hongnan G.</figcaption>
 </figure>
 
 This allows more detailed analysis than mere proportion of correct classifications such as Accuracy. As we have seen earlier, Accuracy is not a reliable metric for the real performance of a classifier, because it will yield misleading results if the data set is imbalanced (that is, when the numbers of observations in different classes vary greatly).
@@ -292,20 +291,20 @@ print("Outcome values : \n", tp, fn, fp, tn)
 ??? question
     Now suppose we add another class to the dataset, how should we then calculate the confusion matrix? We first use scikit-learn to plot it out.
 
-| index | predicted_y | actual_y   |
-| ----: | :---------- | :--------- |
-|     1 | malignant   | malignant  |
-|     2 | malignant   | malignant  |
-|     3 | benign      | malignant  |
-|     4 | benign      | malignant  |
-|     5 | benign      | malignant  |
-|     6 | benign      | benign     |
-|     7 | benign      | benign     |
-|     8 | benign      | benign     |
-|     9 | benign      | benign     |
-|    10 | malignant   | benign     |
-|    11 | borderline  | borderline |
-|    12 | borderline  | malignant  |
+|   index | predicted_y   | actual_y   |
+|--------:|:--------------|:-----------|
+|       1 | malignant     | malignant  |
+|       2 | malignant     | malignant  |
+|       3 | benign        | malignant  |
+|       4 | benign        | malignant  |
+|       5 | benign        | malignant  |
+|       6 | benign        | benign     |
+|       7 | benign        | benign     |
+|       8 | benign        | benign     |
+|       9 | benign        | benign     |
+|      10 | malignant     | benign     |
+|      11 | borderline    | borderline |
+|      12 | borderline    | malignant  |
 
 
 ```python
