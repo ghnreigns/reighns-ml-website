@@ -10,6 +10,8 @@ nav:
       - Accuracy: metrics/accuracy.md
       - Confusion Matrix: metrics/confusion_matrix.md
       - Precision-Recall-F1: metrics/precision_recall_f1.md
+      - ROC and PR Curves: metrics/roc_pr_curve.md
+      - Cohen's Kappa: metrics/cohens_kappa.md
   - Deep Learning with PyTorch:
     - Computer Vision:
       - Image: deep_learning/computer_vision/image.md

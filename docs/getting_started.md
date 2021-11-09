@@ -221,6 +221,9 @@ This is testing[^1] footnotes.
 
 ## Setting up GitHub Pages and Mkdocs (Website)
 
+!!! note "Update November 9th, 2021"
+    You can skip most steps if you just fork this repository and follow the format.
+
 Welcome to my example website! This website uses
 [MkDocs](https://www.mkdocs.org/) with the [Material
 theme](https://squidfunk.github.io/mkdocs-material/) and an automated
@@ -364,14 +367,8 @@ helpful extensions for
 - code blocks with syntax highlighting.
 
 In addition, MkDocs also supports GitHub-flavored Markdown tables. To
-see examples of syntax for these elements, see
-[example.md](example.md).
+see examples of syntax for these elements, see the MkDocs website [here](https://squidfunk.github.io/mkdocs-material/).
 
-If you add files of a type other than Markdown (e.g., images, IPython
-Notebooks) into the `docs/` folder, these will be copied over to your
-built website. See for example the [Notebooks](notebooks_list.md) section
-of this template which provides links to download IPython notebooks in
-this repository.
 
 #### Deploying Your Changes
 
@@ -407,7 +404,7 @@ your changes to GitHub Pages.
 
 ### Pandoc (Markdown Converter)
 
-More often than not, you will need to convert a jupyter notebook to markdown file for deployment (as markdown supports Admonitions in Mkdocs). Here is a way to do it.
+More often than not, you will need to convert a jupyter notebook to markdown file for deployment (as markdown supports Admonitions in Mkdocs). Here is a way to do it, it is very convenient as it not only converts your notebook files to markdown, it also stores your output as images in a folder for you. This means any images rendered in notebook by `matplotlib` etc will now show up in markdown!
 
 ```bash
 brew install pandoc
