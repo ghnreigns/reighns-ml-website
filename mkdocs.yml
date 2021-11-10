@@ -3,7 +3,9 @@ site_url: https://ghnreigns.github.io/reighns-ml-journey # change ghnreighns to 
 nav:
   - Home: index.md
   - About: about.md
-  - Getting Started: getting_started.md
+  - Getting Started: 
+    - Workflow: getting_started.md
+    - git: git.md
   - Machine Learning Metrics: 
     - Classification:
       - Introduction: metrics/classification_metrics.md
