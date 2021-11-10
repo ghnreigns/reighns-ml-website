@@ -14,7 +14,7 @@ nav:
       - Cohen's Kappa: metrics/cohens_kappa.md
   - Machine Learning:
     - Supervised Learning Theory:
-      - Regression: 
+      - Regression: about.md
   - Deep Learning with PyTorch:
     - Computer Vision:
       - Image: deep_learning/computer_vision/image.md
