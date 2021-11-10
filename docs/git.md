@@ -1,6 +1,15 @@
-## Git
+<div align="center">
+<h1>Git Guide</a></h1>
+<br>
+</div>
 
-The following notes' taken from [Colt Steele](https://www.youtube.com/watch?v=USjZcfj8yxE). However, I have added some steps on remote repositories.
+---
+
+# Introduction
+
+The following notes' taken from [Colt Steele](https://www.youtube.com/watch?v=USjZcfj8yxE). However, I have added some steps on remote repositories towards the end.
+
+## Git
 
 ### Downloading and Installing Git
 
@@ -8,10 +17,8 @@ Git is primarily used via the command-line interface, which we can access with o
 
 However, we first need to make sure that we have Git installed on our computers.
 
-<aside>
-ℹ️ You can download Git here: [https://git-scm.com/downloads](https://git-scm.com/downloads)
-
-</aside>
+!!! note
+    You can download Git here: [https://git-scm.com/downloads](https://git-scm.com/downloads)
 
 Click the download link for your specific operating system and then follow through the installation wizard to get things set up on your computer!
 
