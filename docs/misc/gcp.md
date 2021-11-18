@@ -50,13 +50,15 @@ Create a service account key by the following:
 4. Click Create. A JSON key file is downloaded to your computer.
 5. Click Close.
 
-## Setup Autheticated Environment
+## Setup Authenticated Environment
 
 Now you have a `json` file from previous step. Put the `json` file in a folder. Then everytime you start a terminal or new window, you can use 
 
 ```bash
 $env:GOOGLE_APPLICATION_CREDENTIALS="$PATH$TO$JSON"
 ```
+
+It seems a hassle to type the command everytime. May look into this link[^GCP python] and this[^GCP python CLI] to see how to setup the environment.
 
 ## Upload and Download Files
 
@@ -87,7 +89,8 @@ def upload_to_bucket(
 
     Args:
         source_file_name (str): The file in local that you want to upload.
-        destination_blob_name (str): The name of the file in the bucket. To include full path.
+        destination_blob_name (str): The name of the file in the bucket.
+                                     To include full path.
         bucket_name (str): The name of the bucket.
     """
 
@@ -126,16 +129,20 @@ if __name__ == "__main__":
    download_from_bucket(
       SOURCE_FILE_NAME, DESTINATION_BLOB_NAME, BUCKET_NAME, PROJECT_ID
    )
-   ```
+```
 
 If you want to mass upload or download, you just need to create a loop as such:
 
 ```python
 for file in os.listdir(path):
-    upload_to_bucket(SOURCE_FILE_NAME, DESTINATION_BLOB_NAME, BUCKET_NAME, PROJECT_ID)
+    upload_to_bucket(
+    SOURCE_FILE_NAME, DESTINATION_BLOB_NAME, BUCKET_NAME, PROJECT_ID
+)
 ```
 
-[^GCP Bucket]: https://cloud.google.com/storage/docs/creating-buckets
-[^stackoverflow]: https://stackoverflow.com/questions/69959969/how-to-write-files-from-local-to-gcp-using-python
-[^install Cloud SDK]: https://cloud.google.com/sdk/docs/quickstart
-[^service account]: https://cloud.google.com/docs/authentication/getting-started#command-line
+[^GCP Bucket]: [Creating GCP Buckets](https://cloud.google.com/storage/docs/creating-buckets)
+[^stackoverflow]: [How to write files from Local to GCP using Python](https://stackoverflow.com/questions/69959969/how-to-write-files-from-local-to-gcp-using-python)
+[^install Cloud SDK]: [Install Cloud SDK](https://cloud.google.com/sdk/docs/quickstart)
+[^service account]: [Service Account](https://cloud.google.com/docs/authentication/getting-started#command-line)
+[^GCP python]: [How to upload a file to Google Cloud Storage on Python 3?](https://stackoverflow.com/questions/37003862/how-to-upload-a-file-to-google-cloud-storage-on-python-3)
+[^GCP python CLI]: [Setting GOOGLE_APPLICATION_CREDENTIALS for BigQuery Python CLI](https://stackoverflow.com/questions/35159967/setting-google-application-credentials-for-bigquery-python-cli)
