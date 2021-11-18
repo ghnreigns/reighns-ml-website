@@ -27,7 +27,8 @@ nav:
             - Modelling (Metrics): supervised_learning/classification/breast_cancer_wisconsin/Stage 4 - Modelling (Metric to Optimize).ipynb
             - Modelling (Cross-Validation Schema): supervised_learning/classification/breast_cancer_wisconsin/Stage 5 - Modelling (Cross-Validation Methodology).ipynb
             - Modelling (Preprocessing and Spot Checking): supervised_learning/classification/breast_cancer_wisconsin/Stage 6 - Modelling (Preprocessing and Spot Checking).ipynb
-
+            - Modelling (Model Selection): supervised_learning/classification/breast_cancer_wisconsin/Stage 7 - Modelling (Model Selection and Hyperparameter Tuning).ipynb
+            - Modelling (Model Evaluation): supervised_learning/classification/breast_cancer_wisconsin/Stage 8 - Modelling (Model Evaluation and Interpretation).ipynb
   - Deep Learning with PyTorch:
     - Computer Vision:
       - Image: deep_learning/computer_vision/image.md
