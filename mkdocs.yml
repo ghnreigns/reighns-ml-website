@@ -6,6 +6,8 @@ nav:
   - Getting Started: 
     - Workflow: getting_started.md
     - git: git.md
+  - Misc:
+    - GCP: misc/gcp.md
   - Machine Learning Metrics: 
     - Classification:
       - Introduction: metrics/classification_metrics/classification_metrics.md
