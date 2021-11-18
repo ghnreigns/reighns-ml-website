@@ -3,6 +3,7 @@
 1. Write a reading for each topic. See linear regression notebook.
 2. To refer to dafriedman etc's notes on regression and ML models.
 3. To check how to upload objects to gcp.
+4. To make type hinting more accurate, rename variables, especially say the `optimize` function in Stage 7, hints are poorly made.
 
 # Metrics
 
