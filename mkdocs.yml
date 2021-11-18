@@ -20,8 +20,8 @@ nav:
       - Classification:
         - Projects:
           - Breast Cancer Wisconsin:
-            - Introduction: supervised_learning/classification/breast_cancer_wisconsin\Stage 0 - Introduction and Problem Statement.ipynb
-            - Preliminary Data Inspection and Cleaning: supervised_learning/classification/breast_cancer_wisconsin\Stage 1 - Preliminary Data Inspection and Cleaning.ipynb
+            - Introduction: supervised_learning/classification/breast_cancer_wisconsin/Stage 0 - Introduction and Problem Statement.ipynb
+            - Preliminary Data Inspection and Cleaning: supervised_learning/classification/breast_cancer_wisconsin/Stage 1 - Preliminary Data Inspection and Cleaning.ipynb
             - EDA: supervised_learning/classification/breast_cancer_wisconsin/Stage 2 - Preliminary EDA.ipynb
             - Feature Engineering: supervised_learning/classification/breast_cancer_wisconsin/Stage 3 - Feature Engineering.ipynb
             - Modelling (Metrics): supervised_learning/classification/breast_cancer_wisconsin/Stage 4 - Modelling (Metric to Optimize).ipynb
