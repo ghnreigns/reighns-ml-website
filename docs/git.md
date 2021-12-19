@@ -302,8 +302,13 @@ To undo git add before a commit, run git reset <file> or git reset to unstage al
 ---
 
 I need to put the notebook file where I want it to be in the master branch.
+
 ```bash
 git checkout -b <new-branch-name> dummy_file
 git status # to see the status of the current branch
+# write your blog/article
+jupyter nbconvert --to markdown mynotebook.ipynb
+git add .
+git commit -a
 ```
 
