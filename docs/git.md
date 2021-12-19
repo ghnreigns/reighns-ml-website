@@ -310,5 +310,6 @@ git status # to see the status of the current branch
 jupyter nbconvert --to markdown mynotebook.ipynb
 git add .
 git commit -a
+git push origin branch_name -u
 ```
-
+Go to the pull request link, and select reviewer. Then see what changes need to be made, and do it locally. After you are done, 
