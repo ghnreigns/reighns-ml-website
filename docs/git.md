@@ -298,3 +298,12 @@ To undo git add before a commit, run git reset <file> or git reset to unstage al
 
 [^github_token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 [^github_auth]: https://stackoverflow.com/questions/68779962/github-removed-username-password-authorization-now-what
+
+---
+
+I need to put the notebook file where I want it to be in the master branch.
+```bash
+git checkout -b <new-branch-name> dummy_file
+git status # to see the status of the current branch
+```
+
