@@ -16,6 +16,8 @@ nav:
       - Precision-Recall-F1: metrics/classification_metrics/precision_recall_f1.md
       - ROC and PR Curves: metrics/classification_metrics/roc_pr_curve.md
       - Cohen's Kappa: metrics/classification_metrics/cohens_kappa.md
+    - Regression:
+      - Introduction: metrics/regression_metrics/dummy_file.md
   - Machine Learning:
     - Supervised Learning Theory:
       - Regression: about.md
