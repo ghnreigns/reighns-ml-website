@@ -313,3 +313,16 @@ git commit -a
 git push origin branch_name -u
 ```
 Go to the pull request link, and select reviewer. Then see what changes need to be made, and do it locally. After you are done, 
+```bash
+git commit -a
+git push origin branch_name -u
+```
+After that go to the same link and click on re-review.
+
+After review and approved by the reviewer, you have 3 merge options.
+
+- Squash and Merge: Take all the commits during the review and merge them into one commit. The only downside is you cannot go back to one unique commit but you will see all commit messages tho and changes.
+- Create a merge commit: Create a merge commit with the changes from the review. You can use this if you want `git` to track every single commit (messages).
+
+The merge will mean it is updated in master branch also. Then delete the branch if not in use.
+
