@@ -326,3 +326,18 @@ After review and approved by the reviewer, you have 3 merge options.
 
 The merge will mean it is updated in master branch also. Then delete the branch if not in use.
 
+---
+
+git branch for pytorch pipeline:
+
+1. In my main PyTorch repo, the code is on the branch `master`. 
+2. I want to create a branch for a new competition using the `master` branch. # git checkout -b ...
+3. Put the competition data in a different folder that stores all data. In a way, you can put it like this:
+    ```
+    data/competition_1_data/
+    data/competition_2_data/
+    ```
+4. I will write code inside the branch.
+   1. Scenario 1: I made changes in the branch and also want to merge this change into main -> commit, push, merge, pull to master branch.
+      1. You can also create a `dev` branch and work on it as well.
+   2. Scenario 2: I made changes specific to this branch, and I don't want to merge and merge some commits that propels to the main.
