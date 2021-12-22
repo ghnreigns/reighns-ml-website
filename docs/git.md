@@ -73,6 +73,11 @@ Generally stored outside of your isolated local system, usually on a remote serv
 !!! note
     Simply create this using this simple [guide](https://docs.github.com/en/get-started/quickstart/create-a-repo).
 
+
+#### Git Clone
+
+Special mention if you have just reset your computer and want to clone your repo from remote. Then you do not need `git init` and just use `git clone https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository folder_name` to clone your repo to local. See more [here](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository).
+
 ---
 
 ### Staging and committing code
