@@ -4,6 +4,9 @@ site/
 venv_ml_website
 **/.ipynb_checkpoints/
 
+# Converted Markdown Files
+docs/*/**/*.md
+
 # MacOS
 .DS_Store
 */.DS_Store

@@ -14,13 +14,39 @@ jobs:
         with:
           python-version: 3.8
           architecture: x64
-      - name: Install Dependencies
+      - name: Install Application Dependencies
+        run: |
+          sudo apt-get install parallel
+      - name: Install Python Dependencies
         run: |
           pip install -r requirements.txt
+      - name: Compile Jupyter Notebooks to Markdown
+        run: |
+          # Find all within the docs/ folder and subdirectories...
+          find ./docs \
+            # ...that are files...
+            -type f \
+            # ...with a .ipynb extension...
+            -name "*.ipynb" \
+            # ...and print the full path to each file to STDOUT,
+            # terminating each entry with a NULL character, piping
+            # the contents of STDOUT to STDIN of the next process.
+            -print0 | \
+          # For each entry received on STDIN...
+          parallel \
+            # ...where the entries are terminated with a NULL character...
+            -0 \
+            # ...display progress information for running and queued jobs...
+            --progress \
+            # ...stop immediately when one job fails...
+            --halt now,fail=1 \
+            # ...and run the following command in parallel for each
+            # file entry, substituting the path to the file for {}.
+            'jupyter nbconvert --to markdown {}'
       - name: Build Website
         run: |
           mkdocs build
-      - name: Push Build Website to gh-pages Branch
+      - name: Push Built Website to gh-pages Branch
         run: |
           git config --global user.name 'Hongnan G.'
           git config --global user.email 'ghnreigns@users.noreply.github.com'
