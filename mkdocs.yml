@@ -24,15 +24,15 @@ nav:
       - Classification:
         - Projects:
           - Breast Cancer Wisconsin:
-            - Introduction: supervised_learning/classification/breast_cancer_wisconsin/Stage 0 - Introduction and Problem Statement.ipynb
-            - Preliminary Data Inspection and Cleaning: supervised_learning/classification/breast_cancer_wisconsin/Stage 1 - Preliminary Data Inspection and Cleaning.ipynb
-            - EDA: supervised_learning/classification/breast_cancer_wisconsin/Stage 2 - Preliminary EDA.ipynb
-            - Feature Engineering: supervised_learning/classification/breast_cancer_wisconsin/Stage 3 - Feature Engineering.ipynb
-            - Modelling (Metrics): supervised_learning/classification/breast_cancer_wisconsin/Stage 4 - Modelling (Metric to Optimize).ipynb
-            - Modelling (Cross-Validation Schema): supervised_learning/classification/breast_cancer_wisconsin/Stage 5 - Modelling (Cross-Validation Methodology).ipynb
-            - Modelling (Preprocessing and Spot Checking): supervised_learning/classification/breast_cancer_wisconsin/Stage 6 - Modelling (Preprocessing and Spot Checking).ipynb
-            - Modelling (Model Selection): supervised_learning/classification/breast_cancer_wisconsin/Stage 7 - Modelling (Model Selection and Hyperparameter Tuning).ipynb
-            - Modelling (Model Evaluation): supervised_learning/classification/breast_cancer_wisconsin/Stage 8 - Modelling (Model Evaluation and Interpretation).ipynb
+            - Introduction: supervised_learning/classification/breast_cancer_wisconsin/Stage 0 - Introduction and Problem Statement.md
+            - Preliminary Data Inspection and Cleaning: supervised_learning/classification/breast_cancer_wisconsin/Stage 1 - Preliminary Data Inspection and Cleaning.md
+            - EDA: supervised_learning/classification/breast_cancer_wisconsin/Stage 2 - Preliminary EDA.md
+            - Feature Engineering: supervised_learning/classification/breast_cancer_wisconsin/Stage 3 - Feature Engineering.md
+            - Modelling (Metrics): supervised_learning/classification/breast_cancer_wisconsin/Stage 4 - Modelling (Metric to Optimize).md
+            - Modelling (Cross-Validation Schema): supervised_learning/classification/breast_cancer_wisconsin/Stage 5 - Modelling (Cross-Validation Methodology).md
+            - Modelling (Preprocessing and Spot Checking): supervised_learning/classification/breast_cancer_wisconsin/Stage 6 - Modelling (Preprocessing and Spot Checking).md
+            - Modelling (Model Selection): supervised_learning/classification/breast_cancer_wisconsin/Stage 7 - Modelling (Model Selection and Hyperparameter Tuning).md
+            - Modelling (Model Evaluation): supervised_learning/classification/breast_cancer_wisconsin/Stage 8 - Modelling (Model Evaluation and Interpretation).md
   - Deep Learning with PyTorch:
     - Computer Vision:
       - Image: deep_learning/computer_vision/image.md
@@ -48,11 +48,6 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.arithmatex:
       generic: true
-plugins:
-  - mkdocs-jupyter:
-      execute: False
-      ignore_h1_titles: True
-      kernel_name: python3
 extra_javascript:
   - javascript/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
