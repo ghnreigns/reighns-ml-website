@@ -35,6 +35,8 @@ nav:
             - Modelling (Model Evaluation): supervised_learning/classification/breast_cancer_wisconsin/Stage 8 - Modelling (Model Evaluation and Interpretation).md
   - Deep Learning with PyTorch:
     - Computer Vision:
+      - General: 
+        - Visualizing Convolutional Filters: deep_learning/computer_vision/general/visualizing_convolutional_filters/Visualizing Convolutional Filters.md
       - Image: deep_learning/computer_vision/image.md
 theme:
   name: material
