@@ -306,23 +306,37 @@ To undo git add before a commit, run git reset <file> or git reset to unstage al
 
 ---
 
-I need to put the notebook file where I want it to be in the master branch.
+### Git Branches For Personal Projects Guidelines
+
+#### Website and Blogging
+
+Assume that I wrote a notebook named `blog.ipynb` and I want to publish it to my personal blog. Here are the general guidelines.
+
+- Say that I put the notebook `blog.ipynb` in the `notebooks` folder in master branch.
+- Then before I publish, I have a collaborator named **Joe** who is also a collaborator of my personal blog (who acts as my editor).
+- I will create a new branch named `blog` and push the notebook to the branch.
+- Then I will commit the notebook to the branch and create a pull request for **Joe** to review. 
+    - If **Joe** approves the pull request, then I will merge the branch to the master branch using `squash and merge` or `merge commit`.
+    - If **Joe** proposes some small changes, I will then go my branch `blog` and make the changes locally, and commit them with a pull request for **Joe** again. Once he approved, I will merge the branch to the master branch.
+- After the merge, I will delete the branch `blog` as the updates are reflected in the master branch.
+
+The above can be outlined in pseudo code below:
 
 ```bash
-git checkout -b <new-branch-name> dummy_file
-git status # to see the status of the current branch
-# write your blog/article
+# Place the notebook `blog.ipynb` in the `notebooks` folder in master branch.
+# Create a new branch named `blog` and push the notebook to the branch.
+git checkout -b <new-branch-name> blog
+git status # to see the status of the current branch.
+# Convert the notebook to markdown if needed.
 jupyter nbconvert --to markdown mynotebook.ipynb
+# Commit the notebook to the branch.
 git add .
 git commit -a
 git push origin branch_name -u
+# Go to the pull request link, and select reviewer for review.
+# If no changes proposed, merge the branch to master.
+# If there are changes proposed, edit the codes in the branch locally and push the changes to the branch for review again. After that go to the same link and click on re-review.
 ```
-Go to the pull request link, and select reviewer. Then see what changes need to be made, and do it locally. After you are done, 
-```bash
-git commit -a
-git push origin branch_name -u
-```
-After that go to the same link and click on re-review.
 
 After review and approved by the reviewer, you have 3 merge options.
 
@@ -332,6 +346,8 @@ After review and approved by the reviewer, you have 3 merge options.
 The merge will mean it is updated in master branch also. Then delete the branch if not in use.
 
 ---
+
+#### Git Branches For Machine Learning Projects
 
 git branch for pytorch pipeline:
 
