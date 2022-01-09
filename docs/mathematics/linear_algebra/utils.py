@@ -1,5 +1,6 @@
 import numpy as np
-from typing import List, Union
+import torch
+from typing import List, Union, Tuple
 
 
 def dot_product(v1: np.ndarray, v2: np.ndarray) -> float:
@@ -63,3 +64,29 @@ def average_set(vec: Union[np.ndarray, set]) -> float:
 
     assert average == np.mean(vec)
     return average
+
+
+def check_matmul_shape(
+    A: torch.Tensor, B: torch.Tensor
+) -> Tuple[int, int, int]:
+    """Check if the shape of the matrices A and B are compatible for matrix multiplication.
+
+    If A and B are of size (m, n) and (n, p), respectively, then the shape of the resulting matrix is (m, p).
+
+    Args:
+        A (torch.Tensor): The first matrix.
+        B (torch.Tensor): The second matrix.
+
+    Raises:
+        ValueError: Raises a ValueError if the shape of the matrices A and B are not compatible for matrix multiplication.
+
+    Returns:
+        (Tuple[int, int, int]): (m, n, p) where (m, n) is the shape of A and (n, p) is the shape of B.
+    """
+
+    if A.shape[1] != B.shape[0]:
+        raise ValueError(
+            f"The number of columns of A must be equal to the number of rows of B, but got {A.shape[1]} and {B.shape[0]} respectively."
+        )
+
+    return (A.shape[0], A.shape[1], B.shape[1])
