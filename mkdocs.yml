@@ -10,6 +10,7 @@ nav:
     - GCP: misc/gcp.md
   - Mathematics:
     - Linear Algebra:
+      - Fields: mathematics/linear_algebra/00_linear_algebra_fields.md
       - Vectors:
         - Vector Operations: mathematics/linear_algebra/01_linear_algebra_vectors.md
         - Vector Products: mathematics/linear_algebra/02_linear_algebra_vectors.md
