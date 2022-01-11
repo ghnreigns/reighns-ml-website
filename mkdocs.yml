@@ -14,6 +14,7 @@ nav:
       - Vectors:
         - Vector Operations: mathematics/linear_algebra/01_linear_algebra_vectors.md
         - Vector Products: mathematics/linear_algebra/02_linear_algebra_vectors.md
+        - Vector Spaces: mathematics/linear_algebra/03_linear_algebra_vector_spaces.md
       - Matrix:
         - Matrix Multiplication: mathematics/linear_algebra/linear_algebra_matrix_multiplication.md
   - Machine Learning Metrics: 
