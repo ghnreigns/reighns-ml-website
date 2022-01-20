@@ -350,6 +350,18 @@ jupyter nbconvert --to markdown mynotebook.ipynb
 
 ---
 
+#### Pandoc (Wikitext to Markdown)
+
+From the solution [here](https://stackoverflow.com/questions/70484071/how-to-use-pandoc-to-convert-wikitext-to-markdown-with-latex-mathjax-etc-properl). We can do the following:
+
+```bash
+pandoc --from mediawiki --to=markdown-definition_lists wiki.txt  -o wiki.md
+```
+
+where `wiki.txt` is a text file with wiki markup.
+
+---
+
 ## Miscellaneous Problems
 
 ### Path Environment
