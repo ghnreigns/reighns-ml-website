@@ -91,7 +91,7 @@ def average_set(vec: Union[np.ndarray, set]) -> float:
     return average
 
 
-def check_matmul_shape(A: np.ndarray, B: np.ndarray) -> Tuple[int, int, int]:
+def get_matmul_shape(A: np.ndarray, B: np.ndarray) -> Tuple[int, int, int]:
     """Check if the shape of the matrices A and B are compatible for matrix multiplication.
 
     If A and B are of size (m, n) and (n, p), respectively, then the shape of the resulting matrix is (m, p).
