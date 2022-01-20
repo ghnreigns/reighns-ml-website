@@ -268,6 +268,19 @@ git remote rm origin    # remove origin
 git remote show origin  # show remote origin
 ```
 
+---
+
+Sometimes if you are using two github accounts in the same computer, you can do the following:
+
+    1. Create a personal access token for the second account and **tick all access**: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+    2. Add the remote origin for the second account.
+       ```bash
+       git remote add origin "your-repo-http" # add remote origin 
+       git remote set-url origin https://reigHns92@github.com/reigHns92/repo.git
+    3. Push the changes to the second account and a prompt opens for you to key in token access.
+
+---
+
 #### Push
 
 Finally, we use `git push origin master -u` to push to master branch.
