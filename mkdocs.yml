@@ -13,7 +13,9 @@ nav:
       - Fields: mathematics/linear_algebra/00_linear_algebra_fields.md
       - Vectors:
         - Vector Operations: mathematics/linear_algebra/01_linear_algebra_vectors.md
-        - Vector Products: mathematics/linear_algebra/02_linear_algebra_vectors.md
+        - Vector Products:
+          - Dot Product: mathematics/linear_algebra/02_linear_algebra_vectors.md
+          #- Outer Product: mathematics/linear_algebra/02_linear_algebra_vectors.md
         - Vector Spaces: 
           - Vector Subspaces: mathematics/linear_algebra/03_linear_algebra_vector_spaces_vector_subspaces.md
           - Vector Span: mathematics/linear_algebra/04_linear_algebra_vector_spaces_vector_span.md
