@@ -8,6 +8,18 @@ nav:
     - git: git.md
   - Misc:
     - GCP: misc/gcp.md
+  - Mathematics:
+    - Linear Algebra:
+      - Fields: mathematics/linear_algebra/00_linear_algebra_fields.md
+      - Vectors:
+        - Vector Operations: mathematics/linear_algebra/01_linear_algebra_vectors.md
+        - Vector Products: mathematics/linear_algebra/02_linear_algebra_vectors.md
+        - Vector Spaces: 
+          - Vector Subspaces: mathematics/linear_algebra/03_linear_algebra_vector_spaces_vector_subspaces.md
+          - Vector Span: mathematics/linear_algebra/04_linear_algebra_vector_spaces_vector_span.md
+          - Linear Independence: mathematics/linear_algebra/05_linear_algebra_vector_spaces_linear_independence.md
+      - Matrix:
+        - Matrix Multiplication: mathematics/linear_algebra/linear_algebra_matrix_multiplication.md
   - Machine Learning Metrics: 
     - Classification:
       - Introduction: metrics/classification_metrics/classification_metrics.md
@@ -54,3 +66,5 @@ extra_javascript:
   - javascript/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+extra_css:
+    - css/extra.css

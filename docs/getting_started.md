@@ -363,3 +363,9 @@ jupyter nbconvert --to markdown mynotebook.ipynb
 then `'jupyter' is not recognized as an internal or external command, operable program or batch file.` is the error message even though `jupyter` is installed. Usually, the shell will prompt a message to check `PATH`. 
 
 Now go to Advanced System Settings and click on Environment Variables. You will see a list of environment variables. You can add a new environment variable by clicking on the plus sign in the **System Variables**. Add the path recommended by `jupyter` to the `PATH` variable. In my case, it is the obscure `C:\Users\reighns\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts`.
+
+### Mkdocs
+
+#### Full page width
+
+Use this custom `css` code to make page full width.
