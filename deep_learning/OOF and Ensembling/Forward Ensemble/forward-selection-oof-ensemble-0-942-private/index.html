@@ -1,0 +1,1198 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://ghnreigns.github.io/reighns-ml-journey/deep_learning/OOF%20and%20Ensembling/Forward%20Ensemble/forward-selection-oof-ensemble-0-942-private/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.5">
+    
+    
+      
+        <title>How To Ensemble OOF - Hongnan G. Machine Learning Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.cdeb8541.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../../css/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-ensemble-oof" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Hongnan G. Machine Learning Projects" class="md-header__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hongnan G. Machine Learning Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How To Ensemble OOF
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Hongnan G. Machine Learning Projects" class="md-nav__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Hongnan G. Machine Learning Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../getting_started/" class="md-nav__link">
+        Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../git.md" class="md-nav__link">
+        git
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../misc/gcp/" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Machine Learning" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Supervised Learning Theory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Supervised Learning Theory" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Supervised Learning Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        Regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2" type="checkbox" id="__nav_5_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2">
+          Classification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Classification" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1" type="checkbox" id="__nav_5_1_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1">
+          Projects
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projects" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Projects
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1_1" type="checkbox" id="__nav_5_1_2_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1_1">
+          Breast Cancer Wisconsin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Breast Cancer Wisconsin" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_1_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Breast Cancer Wisconsin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%200%20-%20Introduction%20and%20Problem%20Statement/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%201%20-%20Preliminary%20Data%20Inspection%20and%20Cleaning/" class="md-nav__link">
+        Preliminary Data Inspection and Cleaning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%202%20-%20Preliminary%20EDA/" class="md-nav__link">
+        EDA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%203%20-%20Feature%20Engineering/" class="md-nav__link">
+        Feature Engineering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%204%20-%20Modelling%20%28Metric%20to%20Optimize%29/" class="md-nav__link">
+        Modelling (Metrics)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%205%20-%20Modelling%20%28Cross-Validation%20Methodology%29/" class="md-nav__link">
+        Modelling (Cross-Validation Schema)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%206%20-%20Modelling%20%28Preprocessing%20and%20Spot%20Checking%29/" class="md-nav__link">
+        Modelling (Preprocessing and Spot Checking)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%207%20-%20Modelling%20%28Model%20Selection%20and%20Hyperparameter%20Tuning%29/" class="md-nav__link">
+        Modelling (Model Selection)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%208%20-%20Modelling%20%28Model%20Evaluation%20and%20Interpretation%29/" class="md-nav__link">
+        Modelling (Model Evaluation)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Deep Learning with PyTorch
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Deep Learning with PyTorch" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Deep Learning with PyTorch
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1">
+          Computer Vision
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Computer Vision" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Computer Vision
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1_1" type="checkbox" id="__nav_6_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1_1">
+          General
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="General" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          General
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../computer_vision/general/image_normalization/Image_Normalization_and_Standardization.md" class="md-nav__link">
+        Image Normalization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../computer_vision/general/visualizing_convolutional_filters/Visualizing%20Convolutional%20Filters/" class="md-nav__link">
+        Visualizing Convolutional Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../computer_vision/general/freeze_layers/freezing_layers/" class="md-nav__link">
+        How to freeze Batch Norm Layers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="how-to-ensemble-oof">How To Ensemble OOF</h1>
+<p>In this notebook, we learn how to use <code>forward selection</code> to ensemble OOF. First build lots of models using the same KFolds (i.e. use same <code>seed</code>). Next save all the oof files as <code>oof_XX.csv</code> and submission files as <code>sub_XX.csv</code> where the oof and submission share the same <code>XX</code> number. Then save them in a Kaggle dataset and run the code below.</p>
+<p>The ensemble begins with the model of highest oof AUC. Next each other model is added one by one to see which additional model increases ensemble AUC the most. The best additional model is kept and the process is repeated until the ensemble AUC doesn't increase.</p>
+<h1 id="read-oof-files">Read OOF Files</h1>
+<p>When i get more time, I will compete this table to describe all 39 models in this notebook. For now here are the ones that get selected:</p>
+<table>
+<thead>
+<tr>
+<th>k</th>
+<th>CV</th>
+<th>LB</th>
+<th>read size</th>
+<th>crop size</th>
+<th>effNet</th>
+<th>ext data</th>
+<th>upsample</th>
+<th>misc</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.910</td>
+<td>0.950</td>
+<td>384</td>
+<td>384</td>
+<td>B6</td>
+<td>2018</td>
+<td>no</td>
+<td></td>
+<td>oof_100</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.916</td>
+<td>0.946</td>
+<td>384</td>
+<td>384</td>
+<td>B345</td>
+<td>no</td>
+<td>no</td>
+<td></td>
+<td>oof_108</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0.935</td>
+<td>0.949</td>
+<td>768</td>
+<td>512</td>
+<td>B7</td>
+<td>2018</td>
+<td>1,1,1,1</td>
+<td></td>
+<td>oof_113</td>
+</tr>
+<tr>
+<td>10</td>
+<td>0.920</td>
+<td>0.941</td>
+<td>512</td>
+<td>384</td>
+<td>B5</td>
+<td>2019 2018</td>
+<td>10,0,0,0</td>
+<td></td>
+<td>oof_117</td>
+</tr>
+<tr>
+<td>12</td>
+<td>0.935</td>
+<td>0.937</td>
+<td>768</td>
+<td>512</td>
+<td>B6</td>
+<td>2019 2018</td>
+<td>3,3,0,0</td>
+<td></td>
+<td>oof_120</td>
+</tr>
+<tr>
+<td>21</td>
+<td>0.933</td>
+<td>0.950</td>
+<td>1024</td>
+<td>512</td>
+<td>B6</td>
+<td>2018</td>
+<td>2,2,2,2</td>
+<td></td>
+<td>oof_30</td>
+</tr>
+<tr>
+<td>26</td>
+<td>0.927</td>
+<td>0.942</td>
+<td>768</td>
+<td>384</td>
+<td>B4</td>
+<td>2018</td>
+<td>no</td>
+<td></td>
+<td>oof_385</td>
+</tr>
+<tr>
+<td>37</td>
+<td>0.936</td>
+<td>0.956</td>
+<td>512</td>
+<td>384</td>
+<td>B5</td>
+<td>2018</td>
+<td>1,1,1,1</td>
+<td></td>
+<td>oof_67</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;../input/melanoma-oof-and-sub/&#39;</span>
+<span class="n">FILES</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">PATH</span><span class="p">)</span>
+
+<span class="n">OOF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">FILES</span> <span class="k">if</span> <span class="s1">&#39;oof&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">OOF_CSV</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">PATH</span><span class="o">+</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">OOF</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We have </span><span class="si">%i</span><span class="s1"> oof files...&#39;</span><span class="o">%</span><span class="nb">len</span><span class="p">(</span><span class="n">OOF</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">();</span> <span class="nb">print</span><span class="p">(</span><span class="n">OOF</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>We have 39 oof files...
+
+[&#39;oof_0.csv&#39; &#39;oof_100.csv&#39; &#39;oof_105.csv&#39; &#39;oof_108.csv&#39; &#39;oof_109.csv&#39;
+ &#39;oof_11.csv&#39; &#39;oof_110.csv&#39; &#39;oof_111.csv&#39; &#39;oof_113.csv&#39; &#39;oof_116.csv&#39;
+ &#39;oof_117.csv&#39; &#39;oof_12.csv&#39; &#39;oof_120.csv&#39; &#39;oof_121.csv&#39; &#39;oof_13.csv&#39;
+ &#39;oof_15.csv&#39; &#39;oof_16.csv&#39; &#39;oof_2.csv&#39; &#39;oof_20.csv&#39; &#39;oof_24.csv&#39;
+ &#39;oof_28.csv&#39; &#39;oof_30.csv&#39; &#39;oof_32.csv&#39; &#39;oof_33.csv&#39; &#39;oof_35.csv&#39;
+ &#39;oof_384.csv&#39; &#39;oof_385.csv&#39; &#39;oof_4.csv&#39; &#39;oof_44.csv&#39; &#39;oof_54.csv&#39;
+ &#39;oof_55.csv&#39; &#39;oof_56.csv&#39; &#39;oof_57.csv&#39; &#39;oof_58.csv&#39; &#39;oof_59.csv&#39;
+ &#39;oof_6.csv&#39; &#39;oof_65.csv&#39; &#39;oof_67.csv&#39; &#39;oof_77.csv&#39;]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span> <span class="nb">len</span><span class="p">(</span><span class="n">OOF_CSV</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">len</span><span class="p">(</span><span class="n">OOF</span><span class="p">)</span> <span class="p">))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">OOF</span><span class="p">)):</span>
+    <span class="n">x</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">OOF_CSV</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">pred</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">TRUE</span> <span class="o">=</span> <span class="n">OOF_CSV</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">values</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">all</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">OOF_CSV</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">target</span><span class="p">,</span><span class="n">x</span><span class="p">[:,</span><span class="n">k</span><span class="p">])</span>
+    <span class="nb">all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">auc</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model </span><span class="si">%i</span><span class="s1"> has OOF AUC = </span><span class="si">%.4f</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">auc</span><span class="p">))</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="nb">all</span><span class="p">)];</span> <span class="n">w</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Model 0 has OOF AUC = 0.9038
+Model 1 has OOF AUC = 0.9096
+Model 2 has OOF AUC = 0.9116
+Model 3 has OOF AUC = 0.9162
+Model 4 has OOF AUC = 0.9231
+Model 5 has OOF AUC = 0.9206
+Model 6 has OOF AUC = 0.9234
+Model 7 has OOF AUC = 0.9267
+Model 8 has OOF AUC = 0.9353
+Model 9 has OOF AUC = 0.9033
+Model 10 has OOF AUC = 0.9199
+Model 11 has OOF AUC = 0.9178
+Model 12 has OOF AUC = 0.9347
+Model 13 has OOF AUC = 0.9238
+Model 14 has OOF AUC = 0.9182
+Model 15 has OOF AUC = 0.9196
+Model 16 has OOF AUC = 0.9160
+Model 17 has OOF AUC = 0.9267
+Model 18 has OOF AUC = 0.9260
+Model 19 has OOF AUC = 0.9306
+Model 20 has OOF AUC = 0.9310
+Model 21 has OOF AUC = 0.9331
+Model 22 has OOF AUC = 0.8979
+Model 23 has OOF AUC = 0.9148
+Model 24 has OOF AUC = 0.9216
+Model 25 has OOF AUC = 0.9278
+Model 26 has OOF AUC = 0.9267
+Model 27 has OOF AUC = 0.9229
+Model 28 has OOF AUC = 0.9277
+Model 29 has OOF AUC = 0.9328
+Model 30 has OOF AUC = 0.9243
+Model 31 has OOF AUC = 0.9012
+Model 32 has OOF AUC = 0.9129
+Model 33 has OOF AUC = 0.9096
+Model 34 has OOF AUC = 0.9188
+Model 35 has OOF AUC = 0.9182
+Model 36 has OOF AUC = 0.9215
+Model 37 has OOF AUC = 0.9358
+Model 38 has OOF AUC = 0.9325
+</code></pre></div>
+<h1 id="build-oof-ensemble-maximize-cv-score">Build OOF Ensemble. Maximize CV Score</h1>
+<div class="highlight"><pre><span></span><code><span class="n">old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">all</span><span class="p">);</span> 
+
+<span class="n">RES</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> 
+<span class="n">PATIENCE</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> 
+<span class="n">TOL</span> <span class="o">=</span> <span class="mf">0.0003</span>
+<span class="n">DUPLICATES</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ensemble AUC = </span><span class="si">%.4f</span><span class="s1"> by beginning with model </span><span class="si">%i</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">old</span><span class="p">,</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">kk</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">OOF</span><span class="p">)):</span>
+
+    <span class="c1"># BUILD CURRENT ENSEMBLE</span>
+    <span class="n">md</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+        <span class="n">md</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="n">md</span>
+
+    <span class="c1"># FIND MODEL TO ADD</span>
+    <span class="n">mx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">mx_k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">mx_w</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching for best model to add... &#39;</span><span class="p">)</span>
+
+    <span class="c1"># TRY ADDING EACH MODEL</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="s1">&#39;, &#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">DUPLICATES</span> <span class="ow">and</span> <span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="n">m</span><span class="p">):</span> <span class="k">continue</span>
+
+        <span class="c1"># EVALUATE ADDING MODEL K WITH WEIGHTS W</span>
+        <span class="n">bst_j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ct</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">RES</span><span class="p">):</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">j</span><span class="o">/</span><span class="n">RES</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="o">/</span><span class="n">RES</span><span class="p">)</span><span class="o">*</span><span class="n">md</span>
+            <span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">TRUE</span><span class="p">,</span><span class="n">tmp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">auc</span><span class="o">&gt;</span><span class="n">bst</span><span class="p">:</span>
+                <span class="n">bst</span> <span class="o">=</span> <span class="n">auc</span>
+                <span class="n">bst_j</span> <span class="o">=</span> <span class="n">j</span><span class="o">/</span><span class="n">RES</span>
+            <span class="k">else</span><span class="p">:</span> <span class="n">ct</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">ct</span><span class="o">&gt;</span><span class="n">PATIENCE</span><span class="p">:</span> <span class="k">break</span>
+        <span class="k">if</span> <span class="n">bst</span><span class="o">&gt;</span><span class="n">mx</span><span class="p">:</span>
+            <span class="n">mx</span> <span class="o">=</span> <span class="n">bst</span>
+            <span class="n">mx_k</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">mx_w</span> <span class="o">=</span> <span class="n">bst_j</span>
+
+    <span class="c1"># STOP IF INCREASE IS LESS THAN TOL</span>
+    <span class="n">inc</span> <span class="o">=</span> <span class="n">mx</span><span class="o">-</span><span class="n">old</span>
+    <span class="k">if</span> <span class="n">inc</span><span class="o">&lt;=</span><span class="n">TOL</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">();</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No increase. Stopping.&#39;</span><span class="p">)</span>
+        <span class="k">break</span>
+
+    <span class="c1"># DISPLAY RESULTS</span>
+    <span class="nb">print</span><span class="p">();</span> <span class="c1">#print(kk,mx,mx_k,mx_w,&#39;%.5f&#39;%inc)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ensemble AUC = </span><span class="si">%.4f</span><span class="s1"> after adding model </span><span class="si">%i</span><span class="s1"> with weight </span><span class="si">%.3f</span><span class="s1">. Increase of </span><span class="si">%.4f</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="n">mx_k</span><span class="p">,</span><span class="n">mx_w</span><span class="p">,</span><span class="n">inc</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="n">old</span> <span class="o">=</span> <span class="n">mx</span><span class="p">;</span> <span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mx_k</span><span class="p">);</span> <span class="n">w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mx_w</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Ensemble AUC = 0.9358 by beginning with model 37
+
+Searching for best model to add... 
+0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 
+Ensemble AUC = 0.9426 after adding model 21 with weight 0.480. Increase of 0.0068
+
+Searching for best model to add... 
+0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 
+Ensemble AUC = 0.9461 after adding model 3 with weight 0.565. Increase of 0.0035
+
+Searching for best model to add... 
+0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 
+Ensemble AUC = 0.9475 after adding model 12 with weight 0.145. Increase of 0.0014
+
+Searching for best model to add... 
+0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 
+Ensemble AUC = 0.9484 after adding model 1 with weight 0.300. Increase of 0.0009
+
+Searching for best model to add... 
+0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 
+Ensemble AUC = 0.9490 after adding model 26 with weight 0.065. Increase of 0.0006
+
+Searching for best model to add... 
+0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 
+Ensemble AUC = 0.9495 after adding model 8 with weight 0.125. Increase of 0.0005
+
+Searching for best model to add... 
+0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 
+Ensemble AUC = 0.9499 after adding model 10 with weight 0.055. Increase of 0.0004
+
+Searching for best model to add... 
+0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 
+No increase. Stopping.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We are using models&#39;</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;with weights&#39;</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;and achieve ensemble AUC = </span><span class="si">%.4f</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">old</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>We are using models [37, 21, 3, 12, 1, 26, 8, 10]
+with weights [0.48, 0.565, 0.145, 0.3, 0.065, 0.125, 0.055]
+and achieve ensemble AUC = 0.9499
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">md</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+    <span class="n">md</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="n">md</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">md</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ensemble OOF predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../forward-selection-oof-ensemble-0-942-private_files/forward-selection-oof-ensemble-0-942-private_9_0.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">OOF_CSV</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">pred</span> <span class="o">=</span> <span class="n">md</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;ensemble_oof.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<h1 id="load-sub-files">Load SUB Files</h1>
+<div class="highlight"><pre><span></span><code><span class="n">SUB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">FILES</span> <span class="k">if</span> <span class="s1">&#39;sub&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">SUB_CSV</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">PATH</span><span class="o">+</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">SUB</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We have </span><span class="si">%i</span><span class="s1"> submission files...&#39;</span><span class="o">%</span><span class="nb">len</span><span class="p">(</span><span class="n">SUB</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">();</span> <span class="nb">print</span><span class="p">(</span><span class="n">SUB</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>We have 39 submission files...
+
+[&#39;sub_0.csv&#39; &#39;sub_100.csv&#39; &#39;sub_105.csv&#39; &#39;sub_108.csv&#39; &#39;sub_109.csv&#39;
+ &#39;sub_11.csv&#39; &#39;sub_110.csv&#39; &#39;sub_111.csv&#39; &#39;sub_113.csv&#39; &#39;sub_116.csv&#39;
+ &#39;sub_117.csv&#39; &#39;sub_12.csv&#39; &#39;sub_120.csv&#39; &#39;sub_121.csv&#39; &#39;sub_13.csv&#39;
+ &#39;sub_15.csv&#39; &#39;sub_16.csv&#39; &#39;sub_2.csv&#39; &#39;sub_20.csv&#39; &#39;sub_24.csv&#39;
+ &#39;sub_28.csv&#39; &#39;sub_30.csv&#39; &#39;sub_32.csv&#39; &#39;sub_33.csv&#39; &#39;sub_35.csv&#39;
+ &#39;sub_384.csv&#39; &#39;sub_385.csv&#39; &#39;sub_4.csv&#39; &#39;sub_44.csv&#39; &#39;sub_54.csv&#39;
+ &#39;sub_55.csv&#39; &#39;sub_56.csv&#39; &#39;sub_57.csv&#39; &#39;sub_58.csv&#39; &#39;sub_59.csv&#39;
+ &#39;sub_6.csv&#39; &#39;sub_65.csv&#39; &#39;sub_67.csv&#39; &#39;sub_77.csv&#39;]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># VERFIY THAT SUBMISSION FILES MATCH OOF FILES</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span> <span class="nb">int</span><span class="p">(</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">SUB</span> <span class="p">]</span> <span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span> <span class="nb">int</span><span class="p">(</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">OOF</span> <span class="p">]</span> <span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR submission files dont match oof files&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">!=</span><span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR submission files dont match oof files&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span> <span class="nb">len</span><span class="p">(</span><span class="n">SUB_CSV</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">len</span><span class="p">(</span><span class="n">SUB</span><span class="p">)</span> <span class="p">))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">SUB</span><span class="p">)):</span>
+    <span class="n">y</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">SUB_CSV</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">values</span>
+</code></pre></div>
+<h1 id="build-sub-ensemble">Build SUB Ensemble</h1>
+<div class="highlight"><pre><span></span><code><span class="n">md2</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:,</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+    <span class="n">md2</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="n">md2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">md2</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../forward-selection-oof-ensemble-0-942-private_files/forward-selection-oof-ensemble-0-942-private_16_0.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">SUB_CSV</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">md2</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;ensemble_sub.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../../assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.1e84347e.min.js"></script>
+      
+        <script src="../../../../javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

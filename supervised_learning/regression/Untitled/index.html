@@ -1,0 +1,1476 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://ghnreigns.github.io/reighns-ml-journey/supervised_learning/regression/Untitled/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.5">
+    
+    
+      
+        <title>Untitled - Hongnan G. Machine Learning Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.cdeb8541.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#readings" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Hongnan G. Machine Learning Projects" class="md-header__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hongnan G. Machine Learning Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Untitled
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Hongnan G. Machine Learning Projects" class="md-nav__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Hongnan G. Machine Learning Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/" class="md-nav__link">
+        Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../git.md" class="md-nav__link">
+        git
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/gcp/" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Machine Learning" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Supervised Learning Theory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Supervised Learning Theory" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Supervised Learning Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        Regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2" type="checkbox" id="__nav_5_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2">
+          Classification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Classification" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1" type="checkbox" id="__nav_5_1_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1">
+          Projects
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projects" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Projects
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1_1" type="checkbox" id="__nav_5_1_2_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1_1">
+          Breast Cancer Wisconsin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Breast Cancer Wisconsin" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_1_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Breast Cancer Wisconsin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%200%20-%20Introduction%20and%20Problem%20Statement/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%201%20-%20Preliminary%20Data%20Inspection%20and%20Cleaning/" class="md-nav__link">
+        Preliminary Data Inspection and Cleaning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%202%20-%20Preliminary%20EDA/" class="md-nav__link">
+        EDA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%203%20-%20Feature%20Engineering/" class="md-nav__link">
+        Feature Engineering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%204%20-%20Modelling%20%28Metric%20to%20Optimize%29/" class="md-nav__link">
+        Modelling (Metrics)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%205%20-%20Modelling%20%28Cross-Validation%20Methodology%29/" class="md-nav__link">
+        Modelling (Cross-Validation Schema)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%206%20-%20Modelling%20%28Preprocessing%20and%20Spot%20Checking%29/" class="md-nav__link">
+        Modelling (Preprocessing and Spot Checking)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%207%20-%20Modelling%20%28Model%20Selection%20and%20Hyperparameter%20Tuning%29/" class="md-nav__link">
+        Modelling (Model Selection)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classification/breast_cancer_wisconsin/Stage%208%20-%20Modelling%20%28Model%20Evaluation%20and%20Interpretation%29/" class="md-nav__link">
+        Modelling (Model Evaluation)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Deep Learning with PyTorch
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Deep Learning with PyTorch" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Deep Learning with PyTorch
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1">
+          Computer Vision
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Computer Vision" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Computer Vision
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1_1" type="checkbox" id="__nav_6_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1_1">
+          General
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="General" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          General
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deep_learning/computer_vision/general/image_normalization/Image_Normalization_and_Standardization.md" class="md-nav__link">
+        Image Normalization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deep_learning/computer_vision/general/visualizing_convolutional_filters/Visualizing%20Convolutional%20Filters/" class="md-nav__link">
+        Visualizing Convolutional Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deep_learning/computer_vision/general/freeze_layers/freezing_layers/" class="md-nav__link">
+        How to freeze Batch Norm Layers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#readings" class="md-nav__link">
+    Readings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-linear-regression" class="md-nav__link">
+    Simple Linear Regression
+  </a>
+  
+    <nav class="md-nav" aria-label="Simple Linear Regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conditional-mean-and-expectation" class="md-nav__link">
+    Conditional Mean and Expectation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-to-predict-y" class="md-nav__link">
+    Function to predict y
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-of-residuals" class="md-nav__link">
+    Function of Residuals
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-of-residual-sum-of-squared-error-and-ols" class="md-nav__link">
+    Function of Residual Sum of Squared Error and OLS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prediction" class="md-nav__link">
+    Prediction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretation" class="md-nav__link">
+    Interpretation
+  </a>
+  
+    <nav class="md-nav" aria-label="Interpretation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#r-squared" class="md-nav__link">
+    R-Squared
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculation-of-r-squared" class="md-nav__link">
+    Calculation of R-Squared
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-linear-regression-mlr" class="md-nav__link">
+    Multiple Linear Regression (MLR)
+  </a>
+  
+    <nav class="md-nav" aria-label="Multiple Linear Regression (MLR)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assumptions-of-linear-regression" class="md-nav__link">
+    Assumptions of Linear Regression
+  </a>
+  
+    <nav class="md-nav" aria-label="Assumptions of Linear Regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linearity" class="md-nav__link">
+    Linearity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#homoscedasticity" class="md-nav__link">
+    Homoscedasticity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normality-of-the-error-terms" class="md-nav__link">
+    Normality of the Error Terms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-autocorrelation-between-error-terms" class="md-nav__link">
+    No Autocorrelation between Error Terms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multicollinearity-among-predictors" class="md-nav__link">
+    Multicollinearity among Predictors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notations-and-matrix-representation-of-linear-regression" class="md-nav__link">
+    Notations and Matrix Representation of Linear Regression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break-down-of-the-matrix-representation" class="md-nav__link">
+    Break down of the Matrix Representation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimal-beta-normal-equation" class="md-nav__link">
+    Optimal \(\beta\) - Normal Equation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prediction_1" class="md-nav__link">
+    Prediction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-scaling" class="md-nav__link">
+    Feature Scaling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hypothesis-testing-on-beta" class="md-nav__link">
+    Hypothesis Testing on \(\beta\)
+  </a>
+  
+    <nav class="md-nav" aria-label="Hypothesis Testing on \(\beta\)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#t-statistics" class="md-nav__link">
+    T-Statistics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-complexity" class="md-nav__link">
+    Time Complexity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preamble-for-the-next-series-on-linear-regression" class="md-nav__link">
+    Preamble for the next series on Linear Regression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orthogonalization" class="md-nav__link">
+    Orthogonalization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regularization" class="md-nav__link">
+    Regularization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistical-and-interpretation-of-linear-regression" class="md-nav__link">
+    Statistical and Interpretation of Linear Regression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    Python Implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references-and-citations" class="md-nav__link">
+    References and Citations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h2 id="readings">Readings</h2>
+<ul>
+<li>DIVE INTO DEEP LEARNING (Chapter 3)</li>
+<li>
+<p>INTRODUCTION TO STATISTICAL LEARNING (Chapter 3)</p>
+</li>
+<li>
+<p><a href="#simple-linear-regression">Simple Linear Regression</a></p>
+</li>
+<li><a href="#conditional-mean-and-expectation">Conditional Mean and Expectation</a></li>
+<li><a href="#function-to-predict-y">Function to predict y</a></li>
+<li><a href="#function-of-residuals">Function of Residuals</a></li>
+<li><a href="#function-of-residual-sum-of-squared-error-and-ols">Function of Residual Sum of Squared Error and OLS</a></li>
+<li><a href="#prediction">Prediction</a></li>
+<li><a href="#interpretation">Interpretation</a><ul>
+<li><a href="#r-squared">R-Squared</a></li>
+<li><a href="#calculation-of-r-squared">Calculation of R-Squared</a></li>
+</ul>
+</li>
+<li><a href="#multiple-linear-regression-mlr">Multiple Linear Regression (MLR)</a></li>
+<li><a href="#assumptions-of-linear-regression">Assumptions of Linear Regression</a><ul>
+<li><a href="#linearity"><strong>Linearity</strong></a></li>
+<li><a href="#homoscedasticity"><strong>Homoscedasticity</strong></a></li>
+<li><a href="#normality-of-the-error-terms">Normality of the Error Terms</a></li>
+<li><a href="#no-autocorrelation-between-error-terms"><strong>No Autocorrelation between Error Terms</strong></a></li>
+<li><a href="#multicollinearity-among-predictors">Multicollinearity among Predictors</a></li>
+</ul>
+</li>
+<li><a href="#notations-and-matrix-representation-of-linear-regression">Notations and Matrix Representation of Linear Regression</a></li>
+<li><a href="#break-down-of-the-matrix-representation">Break down of the Matrix Representation</a></li>
+<li><a href="#optimal-beta---normal-equation">Optimal <span class="arithmatex">\(\beta\)</span> - Normal Equation</a></li>
+<li><a href="#prediction-1">Prediction</a></li>
+<li><a href="#feature-scaling">Feature Scaling</a></li>
+<li><a href="#hypothesis-testing-on-beta">Hypothesis Testing on <span class="arithmatex">\(\beta\)</span></a><ul>
+<li><a href="#t-statistics">T-Statistics</a></li>
+</ul>
+</li>
+<li><a href="#time-complexity">Time Complexity</a></li>
+<li><a href="#preamble-for-the-next-series-on-linear-regression"><strong>Preamble for the next series on Linear Regression</strong></a></li>
+<li><a href="#orthogonalization"><strong>Orthogonalization</strong></a></li>
+<li><a href="#regularization"><strong>Regularization</strong></a></li>
+<li><a href="#statistical-and-interpretation-of-linear-regression"><strong>Statistical and Interpretation of Linear Regression</strong></a></li>
+<li><a href="#python-implementation">Python Implementation</a></li>
+<li><a href="#references-and-citations">References and Citations</a></li>
+</ul>
+<p>Our dataset is fairly simple, here is a brief overview of the first five rows of it.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sqft</span>    <span class="n">bdrms</span>   <span class="n">age</span> <span class="n">price</span>
+    <span class="mi">2104</span>    <span class="mi">3</span>   <span class="mi">70</span>  <span class="mi">399900</span>
+    <span class="mi">1600</span>    <span class="mi">3</span>   <span class="mi">28</span>  <span class="mi">329900</span>
+    <span class="mi">2400</span>    <span class="mi">3</span>   <span class="mi">44</span>  <span class="mi">369000</span>
+    <span class="mi">1416</span>    <span class="mi">2</span>   <span class="mi">49</span>  <span class="mi">232000</span>
+    <span class="mi">3000</span>    <span class="mi">4</span>   <span class="mi">75</span>  <span class="mi">539900</span>
+</code></pre></div>
+<p>The columns are:</p>
+<div class="highlight"><pre><span></span><code>sqft: the size of the house in sq. ft
+bdrms: number of bedrooms
+age: age in years of house
+price: the price of the house
+</code></pre></div>
+<p>In the following sections, we will divide the price by <span class="arithmatex">\(1000\)</span>, this is to pseudo-standardize the data. One note that we may bring forward in the section is that in Linear Regression, we generally don't need to standardize or center the predictors (see proof in Section: Feature Scaling).</p>
+<h1 id="simple-linear-regression">Simple Linear Regression</h1>
+<p>We will first start off by constructing the Simple Linear Regression (SLR).</p>
+<div class="arithmatex">\[y = \beta_0 + \beta_1 x + \epsilon\]</div>
+<div class="arithmatex">\[\text{price} = \beta_0 + \beta_1 \text{sqft} + \epsilon\]</div>
+<p>where <span class="arithmatex">\(\beta_0\)</span> is the intercept, <span class="arithmatex">\(\beta_1\)</span> the coefficient and <span class="arithmatex">\(\epsilon\)</span> is the error term. The error term can be thought of as the errors in the random universe, and makes up for the deviations in the model that cannot be prevented, we will not touch too much on the <span class="arithmatex">\(\epsilon\)</span> and will take it as the difference between the predicted and true values which are not being explained by the variables <span class="arithmatex">\(x\)</span> in the SLR model.</p>
+<hr />
+<p>Without the intercept term the regression line would always have to pass through the origin, which is almost never an optimal way to represent the relationship between our target and predictor variable. This concept is closely linked to the reason why a model must always have a bias term. </p>
+<blockquote>
+<p>Bias: If there is no bias term in the model, you will lose the flexibility of your model. Imagine a simple linear regression model without a bias term, then your linear equation <span class="arithmatex">\(y=mx\)</span> will only pass through the origin. Therefore, if your underlying data (pretend that we know that the underlying data's actual function <span class="arithmatex">\(y = 3x + 5\)</span>), then your Linear Regression model will never find the "best fit line" simply because we already assume that our prediction is governed by the slope <span class="arithmatex">\(m\)</span>, and there does not exist our <span class="arithmatex">\(c\)</span>, the intercept/bias term.</p>
+</blockquote>
+<p>Therefore, it is usually the case whereby we always add in an intercept term. We intend to estimate the values of <span class="arithmatex">\(y\)</span> <strong><em>given</em></strong> <span class="arithmatex">\(x\)</span>. Each value of <span class="arithmatex">\(x\)</span> is multiplied by <span class="arithmatex">\(\beta_{1}\)</span>, with a constant intercept term <span class="arithmatex">\(\beta_{0}\)</span>. We end this section by knowing that 1 unit increase in <span class="arithmatex">\(x\)</span> will correspond to a <span class="arithmatex">\(\beta_1\)</span> unit increase in <span class="arithmatex">\(y\)</span> according to the model, while always remebering to add the intercept term.</p>
+<hr />
+<h2 id="conditional-mean-and-expectation">Conditional Mean and Expectation</h2>
+<p>Something that most formal textbooks will mention is that a linear regression model is predicted via a conditional expectation </p>
+<div class="arithmatex">\[E(y|x)=\beta_0 + \beta_1 x + \epsilon\]</div>
+<p>In the probability model underlying linear regression, X and Y <em>are</em> random variables.</p>
+<blockquote>
+<p>if so, as an example, if Y = obesity and X = age, if we take the conditional expectation <span class="arithmatex">\(E(Y|X=35)\)</span> meaning, whats the expected value of being obese if the individual is 35 across the sample, we just take the average(arithmetic mean) of y for those observations where X=35?</p>
+</blockquote>
+<p>But this means that each yi has in principle a different expected value : so the yi's here do not come from an identically distributed population. If they don't, then our sample {Y,X}, that contains as a random variable only the Y is not "random" (i.e. it is not i.i.d), due to the assumption that the X's are deterministic.</p>
+<p>So given a prediction vector y hat, this set of y hat (note not just single prediction) gives rise to the lowest L2 Loss, note again, this "unique" set of y hat will give rise to the lowest L2 loss. Now, this set of y hat is also the conditional mean of y given the training set X, technically, say our yhat[0] = 2.3, then this means, the corresponding X[0], say 1.5 (only 1 feature), is corresponding to this point 2.3, and this means on average, points residing with the input x = 1.5, will give an expectation value of 2.3. Now, if we go to yhat[1] = 3.3, with X[1] = 1.8, then the same logic applies.</p>
+<p>For more intuition, refer to the <code>lecture/conditional_mean</code>, note this is an often overlooked information and one should not neglect it.</p>
+<hr />
+<h2 id="function-to-predict-y">Function to predict y</h2>
+<p>An simple formula that predicts the value of the house (<span class="arithmatex">\(\hat{y}\)</span>) given input variable square feet (<span class="arithmatex">\(x\)</span>) is as follows:</p>
+<div class="arithmatex">\[\hat{y} = \beta_0 + \beta_1 x\]</div>
+<p>There are no more error terms <span class="arithmatex">\(\epsilon\)</span> and rightfully so, because if our model can know the unknown errors, it will be a perfect model, however, in reality, this SLR is just an estimation of <span class="arithmatex">\(y\)</span>.</p>
+<h2 id="function-of-residuals">Function of Residuals</h2>
+<p>The definition of residuals is easy, it is simply the difference between the predicted <span class="arithmatex">\(y\)</span> value and the actual <span class="arithmatex">\(y\)</span> value. For more rigorous understanding, see the notes I made for myself. </p>
+<div class="arithmatex">\[\text{Residuals}_{i} = y_i - \hat{y}_i ~ \forall i\]</div>
+<h2 id="function-of-residual-sum-of-squared-error-and-ols">Function of Residual Sum of Squared Error and OLS</h2>
+<p>This is important to understand. Informally, we call this RSS, whereby it is a function <span class="arithmatex">\(J(\beta)\)</span> that we want to minimize on. We usually call <span class="arithmatex">\(J(\beta)\)</span> the loss function, as we want to minimize the loss. Slightly more formally, we can say that we want to find the optimal <span class="arithmatex">\(\beta\)</span> that gives rise to the minimum of <span class="arithmatex">\(f = \text{RSS}\)</span>. Mathematically, we express this as <span class="arithmatex">\(\text{argmin}_{\beta \in \R}J(\beta)\)</span>. We will touch on this later in Multiple Linear Regression, where a more rigorous form is being presented, and talking about its global minimum.</p>
+<p><strong>In other words, we want to find the</strong> <span class="arithmatex">\(\beta_0\)</span> and <span class="arithmatex">\(\beta_1\)</span> such that, <span class="arithmatex">\(J(\beta)\)</span> is at a minimum. We choose a reasonable function <span class="arithmatex">\(J(\beta)\)</span> to be the Residual Sum of Squared Error. We will solve for <span class="arithmatex">\(J(\beta)\)</span> and get the best <span class="arithmatex">\(\beta\)</span> so that our predicted <span class="arithmatex">\(\hat{y}\)</span> will be as close to the ground truth <span class="arithmatex">\(y\)</span> as possible.</p>
+<p>As of now, we denote our loss function <span class="arithmatex">\(J(\beta)\)</span> as follows: </p>
+<div class="arithmatex">\[J(\beta)=\sum(y-\hat{y})^2=\sum(y-\beta_0-\beta_1x)^2 = \text{RSS}=\text{SSR}\]</div>
+<p>The reason we chose such a function is because of its convexity, and of course, that it is also the well known Ordinary Least Squares Estimator of <span class="arithmatex">\(\beta\)</span>.  In addition, why the squared residuals instead of just the absolute value of the residuals? Well, both can be used – absolute value of residuals is often used when there are large outliers or other abnormalities in variables. <a href="https://en.wikipedia.org/wiki/Least_absolute_deviations">Solving for the least absolute deviations (LAD)</a> is a type of "robust" regression.</p>
+<p>In High School Calculus, we recall that to find a minimum of a function <span class="arithmatex">\(J(\beta)\)</span>, we take the derivative and set it to 0. We do the exact same thing here:</p>
+<div class="arithmatex">\[\dfrac{dS}{d\beta_1} = -2\sum x(y-\beta_0-\beta_1x)\\
+\dfrac{dS}{d\beta_0} = -2\sum (y-\beta_0-\beta_1 x)\]</div>
+<p>After setting both the equations to 0 and solving it, we note that <span class="arithmatex">\(J(\beta)\)</span> is a convex function, and therefore a minima is guaranteed. We present the optimal <span class="arithmatex">\(\beta\)</span> that minimizes the loss function <span class="arithmatex">\(J(\beta)\)</span>:</p>
+<div class="arithmatex">\[\hat{\beta}_1 = \dfrac{\sum(x-\bar{x})(y-\bar{y})}{(x-\bar{x})^2} = r_{XY} \frac{s_Y}{s_X}\]</div>
+<div class="arithmatex">\[\hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}\]</div>
+<p>where </p>
+<ul>
+<li><span class="arithmatex">\(\bar{y}\)</span> : the sample mean of observed values <span class="arithmatex">\(Y\)</span></li>
+<li><span class="arithmatex">\(\bar{x}\)</span> : the sample mean of observed values <span class="arithmatex">\(X\)</span></li>
+<li><span class="arithmatex">\(s_Y\)</span> : the sample standard deviation of observed values <span class="arithmatex">\(Y\)</span></li>
+<li><span class="arithmatex">\(s_X\)</span>: the sample standard deviation of observed values <span class="arithmatex">\(X\)</span></li>
+<li><span class="arithmatex">\(r_{XY}\)</span>: the sample Pearson correlation coefficient between observed <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span></li>
+</ul>
+<p>Note that I will not continue to put a hat notation on top of the parameters <span class="arithmatex">\(\beta\)</span>, but keep in mind that the <span class="arithmatex">\(\beta\)</span> we found are not the population parameter, instead it is the sample parameter. In statistics, we often call <span class="arithmatex">\(\beta\)</span> as the <strong>true population parameter</strong>, but in reality, we do not have knowledge of what the underlying <strong>parameter</strong> is, and therefore we minimize the loss function to find the best estimate for the true population parameter <span class="arithmatex">\(\beta\)</span>, we denote it as <span class="arithmatex">\(\hat{\beta}\)</span> and call it a <strong>statistics</strong>.</p>
+<p>We end this section off with a note that this method is called the Ordinary Least Squares (OLS).</p>
+<hr />
+<h2 id="prediction">Prediction</h2>
+<p>Since we have the formula to calculate <span class="arithmatex">\(\beta_0, \beta_1\)</span>, we can use <code>python</code> to do the dirty work for us. For the full code, please refer to <strong>appendix</strong>. </p>
+<div class="arithmatex">\[\hat{y} = 71+0.135x\]</div>
+<p>Hereby attached is also a nice plot visualization. Some explanation is as follows: The graph below is 3 graphs stacked together - the blue dots represent <span class="arithmatex">\((x_i, y_i)\)</span> where it represents a scatter plot of the original values of x and its ground truth y, one can observe that the scatter plot of the original dataset vaguely describes a linear relationship; the red dots represent <span class="arithmatex">\((x_i, \hat{y}_i)\)</span> represents a scatter plot of the x and the predicted values <span class="arithmatex">\(\hat{y}\)</span>; last but not least, we draw the best fit line across.</p>
+<p><img alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1333906b-d1c3-4933-84b6-f4d1baa14fbb/newplot_(1).png" src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1333906b-d1c3-4933-84b6-f4d1baa14fbb/newplot_(1).png" /></p>
+<p>Scatter plot</p>
+<hr />
+<h2 id="interpretation">Interpretation</h2>
+<p>One thing that is worth highlighting is I did a simple standardization of the <span class="arithmatex">\(y\)</span> value through a division of 1000. Therefore, our predicted SLR model says that given a constant intercept of <span class="arithmatex">\(71 \times 1000 = 71000\)</span>, we expect that every unit increase of square feet brings about an increase of price of <span class="arithmatex">\(0.135 \times 1000 = 135\)</span> dollars. In other words, if you were to purchase a house which is <span class="arithmatex">\(100\)</span> square feet more than your current house, be ready to fork out an additional <span class="arithmatex">\(13500\)</span> bucks. (Hmm, kinda cheap though 😂, my country Singapore has way higher housing price than this 😐)</p>
+<p>We also can calculate the loss function, or preferably the Residual Sum of Squares (SSR), to be <span class="arithmatex">\(193464\)</span>. Note that this is the lowest number that this model can get, although it seems high, but mathematically, there does not exist a number smaller than the aforementioned, solely because we already minimized the loss function to its global minimum.</p>
+<h3 id="r-squared">R-Squared</h3>
+<p>We can't leave SLR without discussing the most notable metrics to access the model's performance called <strong><a href="https://blog.minitab.com/en/adventures-in-statistics-2/regression-analysis-how-do-i-interpret-r-squared-and-assess-the-goodness-of-fit">R-Squared</a></strong>. Although in all seriousness, it may no longer be the "best" metric due to the following two reasons from <a href="https://blog.minitab.com/en/adventures-in-statistics-2/multiple-regession-analysis-use-adjusted-r-squared-and-predicted-r-squared-to-include-the-correct-number-of-variables#:~:text=The%20adjusted%20R%2Dsquared%20is,less%20than%20expected%20by%20chance.">Reference from Minitab</a></p>
+<ol>
+<li>Every time you add a predictor to a model, the R-squared increases, even if due to chance alone. It never decreases. Consequently, a model with more terms may appear to have a better fit simply because it has more terms.</li>
+<li>If a model has too many predictors and higher order polynomials, it begins to model the random noise in the data. This condition is known as <a href="https://blog.minitab.com/blog/adventures-in-statistics/the-danger-of-overfitting-regression-models">overfitting the model</a> and it produces misleadingly high R-squared values and a lessened ability to make predictions.</li>
+</ol>
+<p>However, we are still going to go through the motion and discuss it. <strong>(Reference from Minitab.)</strong></p>
+<p>R-squared is a statistical measure of how close the data are to the fitted regression line. It is also known as the coefficient of determination, or the coefficient of multiple determination for multiple regression.</p>
+<p>The definition of R-squared is fairly straight-forward; it is the percentage of the response variable variation that is explained by a linear model → R-squared = Explained variation / Total variation</p>
+<p>R-squared is always between 0 and 100% where</p>
+<ul>
+<li>0% indicates that the model explains none of the variability of the response data around its mean.</li>
+<li>100% indicates that the model explains all the variability of the response data around its mean.</li>
+</ul>
+<p>In general, the higher the R-squared, the better the model fits your data. But do remember that the more predictors you add to a LR model, the R-Squared will going to increase regardless.</p>
+<h3 id="calculation-of-r-squared">Calculation of R-Squared</h3>
+<p>This is simple enough, the formula is given by:</p>
+<div class="arithmatex">\[R^2=1-\frac{\text{SSR}}{\text{SST}}\]</div>
+<p>where </p>
+<p>The total sum of squares is defined:</p>
+<div class="arithmatex">\[\text{SST}= \sum_{i=1}^n \left(y_i - \bar{y}\right)^2\]</div>
+<p>The residual sum of squares you are already familiar with. It is defined:</p>
+<div class="arithmatex">\[\text{SSR} = \sum_{i=1}^n \left(y_i - \hat{y}_i\right)^2\]</div>
+<p>With the use of <code>python</code> , <span class="arithmatex">\(R^2=0.73\)</span></p>
+<hr />
+<h1 id="multiple-linear-regression-mlr">Multiple Linear Regression (MLR)</h1>
+<p>Instead of using just one predictor to estimate a continuous target, we build a model with multiple predictor variables. You will be using MLR way more than SLR going forward. Remember the dataset on house pricing? We just now used the most obvious one to predict the <strong>price of a house</strong>, given the predictor variable , <strong>square feet.</strong> However, there are two other variables, <strong>number of bedrooms</strong> and <strong>age of the house</strong>. We can instead model these two variables alongside with <strong>square feet</strong> to predict the <strong>price</strong> of the house. In general, if these variables all play a crucial role in affecting the <strong>price</strong> of the house, then including these 3 variables will make the model more accurate. However, we have to take note of a few <strong>important assumptions</strong> of MLR (SLR included). We will mention it here.</p>
+<p>[Reference]: <a href="https://jeffmacaluso.github.io/post/LinearRegressionAssumptions/">Linear Regression Assumptions by Jeff Macaluso from Microsoft</a></p>
+<hr />
+<h2 id="assumptions-of-linear-regression"><a href="https://jeffmacaluso.github.io/post/LinearRegressionAssumptions/">Assumptions of Linear Regression</a></h2>
+<h3 id="linearity"><strong>Linearity</strong></h3>
+<p>This assumes that there is a linear relationship between the predictors (e.g. independent variables or features) and the response variable (e.g. dependent variable or label). This also assumes that the predictors are additive.</p>
+<p><strong>Why it can happen:</strong> There may not just be a linear relationship among the data. Modeling is about trying to estimate a function that explains a process, and linear regression would not be a fitting estimator (pun intended) if there is no linear relationship.</p>
+<p><strong>What it will affect:</strong> The predictions will be extremely inaccurate because our model is <a href="https://cdn-images-1.medium.com/max/1125/1*_7OPgojau8hkiPUiHoGK_w.png">underfitting</a>. This is a serious violation that should not be ignored.</p>
+<p><strong>How to detect it:</strong> If there is only one predictor, this is pretty easy to test with a scatter plot. Most cases aren’t so simple, so we’ll have to modify this by using a scatter plot to see our predicted values versus the actual values (in other words, view the residuals). Ideally, the points should lie on or around a diagonal line on the scatter plot.</p>
+<p><strong>How to fix it:</strong> Either adding polynomial terms to some of the predictors or applying nonlinear transformations . If those do not work, try adding additional variables to help capture the relationship between the predictors and the label.</p>
+<hr />
+<h3 id="homoscedasticity"><strong>Homoscedasticity</strong></h3>
+<p>This assumes homoscedasticity, which is the same <strong>variance</strong> within our error terms. Heteroscedasticity, the violation of homoscedasticity, occurs when we don’t have an even <strong>variance</strong> across the error terms.</p>
+<p><strong>Why it can happen:</strong> Our model may be giving too much weight to a subset of the data, particularly where the error variance was the largest.</p>
+<p><strong>What it will affect:</strong> Significance tests for coefficients due to the standard errors being biased. Additionally, the confidence intervals will be either too wide or too narrow.</p>
+<p><strong>How to detect it:</strong> Plot the residuals and see if the variance appears to be uniform.</p>
+<p><strong>How to fix it:</strong> Heteroscedasticity (can you tell I like the <em>scedasticity</em> words?) can be solved either by using <a href="https://en.wikipedia.org/wiki/Least_squares#Weighted_least_squares">weighted least squares regression</a> instead of the standard OLS or transforming either the dependent or highly skewed variables. Performing a log transformation on the dependent variable is not a bad place to start.</p>
+<hr />
+<h3 id="normality-of-the-error-terms">Normality of the Error Terms</h3>
+<p>More specifically, this assumes that the error terms of the model are <strong>normally distributed</strong>. Linear regressions other than <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">Ordinary Least Squares (OLS)</a> may also assume normality of the predictors or the label, but that is not the case here.</p>
+<p><strong>Why it can happen:</strong> This can actually happen if either the predictors or the label are significantly non-normal. Other potential reasons could include the linearity assumption being violated or outliers affecting our model.</p>
+<p><strong>What it will affect:</strong> A violation of this assumption could cause issues with either shrinking or inflating our confidence intervals.</p>
+<p><strong>How to detect it:</strong> There are a variety of ways to do so, but we’ll look at both a histogram and the p-value from the Anderson-Darling test for normality.</p>
+<p><strong>How to fix it:</strong> It depends on the root cause, but there are a few options. Nonlinear transformations of the variables, excluding specific variables (such as long-tailed variables), or removing outliers may solve this problem.</p>
+<hr />
+<h3 id="no-autocorrelation-between-error-terms"><strong>No Autocorrelation between Error Terms</strong></h3>
+<p>This assumes no autocorrelation of the error terms. Autocorrelation being present typically indicates that we are missing some information that should be captured by the model.</p>
+<p><strong>Why it can happen:</strong> In a time series scenario, there could be information about the past that we aren’t capturing. In a non-time series scenario, our model could be systematically biased by either under or over predicting in certain conditions. Lastly, this could be a result of a violation of the linearity assumption.</p>
+<p><strong>What it will affect:</strong> This will impact our model estimates.</p>
+<p><strong>How to detect it:</strong> We will perform a <a href="https://en.wikipedia.org/wiki/Durbin%E2%80%93Watson_statistic">Durbin-Watson test</a> to determine if either positive or negative correlation is present. Alternatively, you could create plots of residual autocorrelations.</p>
+<p><strong>How to fix it:</strong> A simple fix of adding lag variables can fix this problem. Alternatively, interaction terms, additional variables, or additional transformations may fix this.</p>
+<hr />
+<h3 id="multicollinearity-among-predictors">Multicollinearity among Predictors</h3>
+<p>This assumes that the predictors used in the regression are not correlated with each other. This won’t render our model unusable if violated, but it will cause issues with the interpretability of the model. This is why in the previous section, we need to make sure that the 3 variables, <strong>square feet, number of bedrooms, age of house</strong> are not highly correlated with each other, else additive effects may happen.</p>
+<p><strong>Why it can happen:</strong> A lot of data is just naturally correlated. For example, if trying to predict a house price with square footage, the number of bedrooms, and the number of bathrooms, we can expect to see correlation between those three variables because bedrooms and bathrooms make up a portion of square footage.</p>
+<p><strong>What it will affect:</strong> Multicollinearity causes issues with the interpretation of the coefficients. Specifically, you can interpret a coefficient as “an increase of 1 in this predictor results in a change of (coefficient) in the response variable, holding all other predictors constant.” This becomes problematic when multicollinearity is present because we can’t hold correlated predictors constant. Additionally, it increases the standard error of the coefficients, which results in them potentially showing as statistically insignificant when they might actually be significant.</p>
+<p><strong>How to detect it:</strong> There are a few ways, but we will use a heatmap of the correlation as a visual aid and examine the <a href="https://en.wikipedia.org/wiki/Variance_inflation_factor">variance inflation factor (VIF)</a>.</p>
+<p><strong>How to fix it:</strong> This can be fixed by other removing predictors with a high variance inflation factor (VIF) or performing dimensionality reduction.</p>
+<hr />
+<h2 id="notations-and-matrix-representation-of-linear-regression">Notations and Matrix Representation of Linear Regression</h2>
+<p><strong>[Reference to Stanford and Andrew Ng, both different notations]</strong></p>
+<p>We first establish that our regression model is defined as</p>
+<div class="arithmatex">\[\left|
+\begin{array}{l}
+\mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon} \\
+ \mathbf{\varepsilon} \sim N(0, \sigma^2 \mathbf{I})
+\end{array}
+\right.\]</div>
+<hr />
+<p>where</p>
+<ul>
+<li><strong>X</strong> <strong>is the Design Matrix:</strong> Let <strong>X</strong> be the design matrix of dimensions <em>m</em> × (<em>n</em> + 1) where <em>m</em> is the number of observations (training samples) and <em>n</em> independent feature/input variables.</li>
+</ul>
+<div class="arithmatex">\[\mathbf{X} = \begin{bmatrix} 1 &amp;  x_1^{(1)} &amp; x_2^{(1)} &amp; \cdots &amp; x_n^{(1)} \\
+                1 &amp;  x_1^{(2)} &amp; x_2^{(2)} &amp; \cdots &amp; x_n^{(2)} \\ 
+                \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+                1 &amp;  x_1^{(m)} &amp; x_2^{(m)} &amp; \cdots &amp; x_n^{(m)} \end{bmatrix}_{m \times (n+1)} = \begin{bmatrix} (\mathbf{x^{(1)}})^{T} \\ (\mathbf{x^{(2)}})^{T} \\ \vdots \\ (\mathbf{x^{(m)}})^{T}\end{bmatrix}\]</div>
+<ul>
+<li>
+<p>The <em>ith</em> column of <strong>X</strong> is defined as <span class="arithmatex">\(x^{(i)}\)</span>, which is also known as the <em>i</em>th training sample, represented as a <em>n</em> × 1 vector.</p>
+<div class="arithmatex">\[\mathbf{x^{(i)}} = \begin{bmatrix} x_1^{(i)} \\ x_2^{(i)} \\ \vdots \\ x_n^{(i)} \end{bmatrix}_{n \times 1}\]</div>
+<p>where <span class="arithmatex">\(x^{(i)}_j\)</span> is the value of feature <em>j</em> in the <em>i</em>th training instance.</p>
+</li>
+<li>
+<p><strong>y</strong> <strong>the output vector:</strong> The column vector <strong>y</strong> contains the output for the <em>m</em> observations.</p>
+<div class="arithmatex">\[\mathbf{y} = \begin{bmatrix} y^{(1)} \\ y^{(2)} \\ \vdots \\ y^{(m)} \end{bmatrix}_{m \times 1}\]</div>
+</li>
+<li>
+<p><strong>β</strong> <strong>the vector of coefficients/parameters:</strong> The column vector <strong>β</strong> contains all the coefficients of the linear model.</p>
+<div class="arithmatex">\[\mathbf{\beta}=\begin{bmatrix} \beta_ 1 \\ \beta_2 \\ \vdots \\ \beta_n\end{bmatrix}_{n \times 1}\]</div>
+</li>
+<li>
+<p><strong>ε</strong> <strong>the random vector of the error terms:</strong> The column vector <strong>ε</strong> contains <em>m</em> error terms corresponding to the <em>m</em> observations.</p>
+<div class="arithmatex">\[\mathbf{\varepsilon} = \begin{bmatrix} \varepsilon^{(1)} \\ \varepsilon^{(2)} \\ \vdots \\ \varepsilon^{(m)} \end{bmatrix}_{m \times 1}\]</div>
+</li>
+</ul>
+<p>As we move along, we will make slight modification to the variables above, to accommodate the intercept term as seen in the Design Matrix.</p>
+<p>On a side note, we present another way to represent the above vectors and matrix, the above is the Machine Learning way, while below is the more Statistical way.</p>
+<div class="arithmatex">\[\mathbf{X} = \begin{bmatrix} 1 &amp;  x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,n} \\
+                1 &amp;  x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,n} \\ 
+                \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+                1 &amp;  x_{m,1} &amp; x_{m,2} &amp; \cdots &amp; x_{m,n} \end{bmatrix}_{m \times (n+1)}\]</div>
+<hr />
+<h2 id="break-down-of-the-matrix-representation">Break down of the Matrix Representation</h2>
+<p>Our dataset has 47 samples, we can generalize it further to a data set with <em>m</em> independent observations, $$(x^{(1)}, y^{(1)}), (<strong>x^{(</strong>2)}, <em>y^{</em>(2)), ..., (<strong>x</strong>(<em>m</em>), <em>y</em>(<em>m</em>))</p>
+<p>where <strong>x</strong>(<em>i</em>) is a <em>m</em> × 1 vector, and <em>y</em>(<em>i</em>) a scalar. </p>
+<p>A <strong>multivariate linear regression</strong> problem between an input variable <span class="arithmatex">\(x^{(i)}\)</span> and output variable <span class="arithmatex">\(y^{(i)}\)</span> can be represented as such:</p>
+<div class="arithmatex">\[y^{(i)} = β_0 + β_1x_1^{(i)} + ... + β_nx_n^{(i)} + ε^{(i)}   \text{where } ε^{(i)}\sim^{\text{i.i.d}}N(0, σ^2)\]</div>
+<p>Since there exists <em>m</em> observations, we can write an equation for each observation:</p>
+<div class="arithmatex">\[y^{(1)} = β_0 + β_1x_1^{(1)} + ... + β_nx_n^{(1)} + ε^{(1)}\\
+y^{(2)} = β_0 + β_1x_1^{(2)} + ... + β_nx_n^{(2)} + ε^{(2)}\\
+\vdots\\
+y^{(m)} = β_0 + β_1x_1^{(m)} + ... + β_nx_n^{(m)} + ε^{(m)}\\\]</div>
+<p>However, linear regression model usually have an intercept term, it is necessary to include a constant variable term <span class="arithmatex">\(\mathbf{x_{0}} = 1_{m × 1}\)</span> such that our linear regression can be expressed compactly in matrix algebra form. Adding the intercept term <span class="arithmatex">\(x_0\)</span>, we have the following:</p>
+<div class="arithmatex">\[y^{(1)} = β_0x_0^{(1)} + β_1x_1^{(1)} + ... + β_nx_n^{(1)} + ε^{(1)}\\
+y^{(2)} = β_0 x_0^{(2)}+ β_1x_1^{(2)} + ... + β_nx_n^{(2)} + ε^{(2)}\\
+\vdots\\
+y^{(m)} = β_0x_0^{(m)}+ β_1x_1^{(m)} + ... + β_nx_n^{(m)} + ε^{(m)}\\\]</div>
+<p>We transform the above system of linear equations into matrix form as follows:</p>
+<div class="arithmatex">\[
+\begin{bmatrix} y^{(1)}  \\ y^{(2)} \\ y^{(3)} \\ \vdots \\ \mathbf{y}^{(m)} \end{bmatrix}_{m \times 1} = \begin{bmatrix} 1 &amp;  x_1^{(1)} &amp; x_2^{(1)} &amp; \cdots &amp; x_n^{(1)} \\
+                1 &amp;  x_1^{(2)} &amp; x_2^{(2)} &amp; \cdots &amp; x_n^{(2)} \\ 
+                \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+                1 &amp;  x_1^{(m)} &amp; x_2^{(m)} &amp; \cdots &amp; x_n^{(m)} \end{bmatrix}_{m \times (n+1)} \begin{bmatrix} \beta_0 \\ \beta_ 1 \\ \beta_2 \\ \vdots \\ \beta_n\end{bmatrix}_{(n+1) \times 1} + \begin{bmatrix} \varepsilon^{(1)} \\ \varepsilon^{(2)} \\ \varepsilon^{(3)} \\ \vdots \\ \varepsilon^{(m)} \end{bmatrix}_{m \times 1}\]</div>
+<p>We then write the above system of linear equations more compactly as <strong>y</strong> = <strong>Xβ</strong> + <strong>ε</strong>   where <span class="arithmatex">\(ε\sim^{\text{i.i.d}}N(0, σ^2)\)</span> recovering back the equation at the start.</p>
+<p>This is assumed to be an accurate reflection of the real world. The model has a systematic component <strong>Xβ</strong> and a stochastic component <strong>ε</strong>. Our goal is then to obtain estimates of the population parameter <strong>β</strong>.</p>
+<hr />
+<h2 id="optimal-beta-normal-equation">Optimal <span class="arithmatex">\(\beta\)</span> - Normal Equation</h2>
+<p>Just as in SLR, we aim to minimize the loss function (note if you average across the samples, we also call them the cost function, but at this stage, we do not differentiate the two words). We introduce a new approach to solve the loss function analytically, called the <strong>Normal Equation.</strong> This method solves for us easily the optimal <span class="arithmatex">\(\beta\)</span> to be <span class="arithmatex">\(\beta = (X^TX)^{-1}X^Ty\)</span>. A brief derivation will be shown below. <strong>[Reference to Stanford]</strong></p>
+<p>Slightly more formally, we can say that we want to find the optimal <span class="arithmatex">\(\beta\)</span> that gives rise to the minimum of <span class="arithmatex">\(f = \text{RSS}\)</span>. Mathematically, we express this as <span class="arithmatex">\(\text{argmin}_{\beta \in \R}J(\beta)\)</span>.</p>
+<p>Given the notations above, we compute the Sum of Squared Residuals (SSR) to be</p>
+<div class="arithmatex">\[J(\beta)=\sum_{i=1}^{m}(y_i-\hat{y}_i)^2=\sum_{i=1}^{m}(y_{i}-(\beta_0+\sum_{j=1}^{n}\beta_{j}x_{i,j}))^2\]</div>
+<p>To understand the above summation, it is paramount to extend the idea of SLR's SSR function to here, back then, we simply calculate the difference of the <code>y_true</code> and <code>y_hat</code> for each and every sample, square it, and sum all the residuals up for all the samples. We extend this idea to MLR and realize it is the same formula, just that now the representation of <span class="arithmatex">\(y\)</span> and <span class="arithmatex">\(\hat{y}\)</span> are different, as shown above.</p>
+<p>With the assumption that <span class="arithmatex">\(X\)</span>is a full rank (invertible) matrix, we can even further reduce the cost/loss function into matrix multiplication (see Normal Equation Derivation II)</p>
+<div class="arithmatex">\[J(\beta)=\dfrac{1}{2m}(X\beta-y)^T(X\beta-y)\]</div>
+<p>We can differentiate the above cost function with respect to each <span class="arithmatex">\(\beta_i\)</span> and solve the optimal <span class="arithmatex">\(\beta\)</span>. We will not derive the equation here but instead give the result to be </p>
+<div class="arithmatex">\[\beta = (X^TX)^{-1}X^Ty\]</div>
+<hr />
+<h2 id="prediction_1">Prediction</h2>
+<p>Here is a snippet of how I calculated the optimal <span class="arithmatex">\(\beta\)</span> coefficients for our dataset, note that in this example, we did not divide the <strong>house price</strong> by <span class="arithmatex">\(1000\)</span> as opposed to what we did for SLR. We show that this does not matter in the interpretation. For details, read the next section Feature Scaling, which also applies here.</p>
+<div class="highlight"><pre><span></span><code><span class="n">XtX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">XtX_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">XtX</span><span class="p">)</span>
+<span class="n">XtX_inv_Xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">XtX_inv</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">_optimal_betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">XtX_inv_Xt</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+<p><span class="arithmatex">\(y = 92451+139x_1-8621x_2-81x_3\)</span> where <span class="arithmatex">\(x_1 = \text{square feet}, x_2 = \text{number of bed rooms}, x_3 = \text{age of house}\)</span></p>
+<p>The coefficient value signifies how much the mean of the dependent variable <span class="arithmatex">\(y\)</span> changes given a one-unit shift in the independent variable <span class="arithmatex">\(x\)</span> while <strong>holding other variables in the model constant.</strong> This property of holding the other variables constant is crucial because it allows you to assess the effect of each variable in isolation from the others. Thus, we see that <span class="arithmatex">\(x_2\)</span> actually holds an inverse relationship with the price of the house, and rightfully so, the scale/range of the variable <strong>number of bedrooms</strong> <span class="arithmatex">\(x_2\)</span> is only <span class="arithmatex">\(1-5\)</span>. This can be confirmed by <code>house.bdrms.value_counts().</code>One unit increase of <span class="arithmatex">\(x_2\)</span> means one more bedroom, which signifies a decrease of <span class="arithmatex">\(8621\)</span> in the price of the house. The rest of the variables are easily interpreted in the same way.</p>
+<hr />
+<h2 id="feature-scaling">Feature Scaling</h2>
+<p><a href="[https://stats.stackexchange.com/questions/29781/when-conducting-multiple-regression-when-should-you-center-your-predictor-varia](https://stats.stackexchange.com/questions/29781/when-conducting-multiple-regression-when-should-you-center-your-predictor-varia)">Reference</a></p>
+<p>In addition to the remarks in the other answers, I'd like to point out that the scale and location of the explanatory variables does not affect the <em>validity</em> of the regression model in any way.</p>
+<p>Consider the model <span class="arithmatex">\(y=β_0+β_1x_1+β_2x_2+…+ϵ\)</span></p>
+<p>The <a href="http://en.wikipedia.org/wiki/Linear_regression#Least-squares_estimation_and_related_techniques">least squares estimators</a> of <span class="arithmatex">\(β_1,β_2,...\)</span> are not affected by shifting. The reason is that these are the slopes of the fitting surface - how much the surface changes if you change <span class="arithmatex">\(x_1,x_2,...\)</span> one unit. This does not depend on location. (The estimator of <span class="arithmatex">\(β_0\)</span>, however, does.)</p>
+<p>By looking at the equations for the estimators you can see that scaling <span class="arithmatex">\(x_1\)</span> with a factor <span class="arithmatex">\(a\)</span> scales <span class="arithmatex">\(\hat{β_1}\)</span>by a factor <span class="arithmatex">\(\frac{1}{a}\)</span>. To see this, note that</p>
+<div class="arithmatex">\[\hat{β_1}(x_1)=\dfrac{\sum_{i=1}^{n}(x_{1,i}−\bar{x}_1)(y_i−\bar{y})}{\sum_{i=1}^{n}(x_{1,i}−\bar{x}_1)^2}\]</div>
+<p>Thus</p>
+<div class="arithmatex">\[\hat{β}_1(ax_1)=\dfrac{∑_{i=1}^{n}(ax_{1,i}−a\bar{x}_1)(y_i−\bar{y})}{∑_{i=1}^{n}(ax_{1,i}−a\bar{x}_1)^2}=\dfrac{\hat{\beta}_1(x_1)}{a}\]</div>
+<p>By looking at the corresponding formula for <span class="arithmatex">\(\hat{β}_2\)</span> (for instance) it is (hopefully) clear that this scaling doesn't affect the estimators of the other slopes.</p>
+<p>Thus, scaling simply corresponds to scaling the corresponding slopes. Because if we scale <strong>square feet (</strong><span class="arithmatex">\(x_1\)</span>) by a factor of <span class="arithmatex">\(\frac{1}{10}\)</span>, then if the original <span class="arithmatex">\(\hat{\beta}_1\)</span>when <strong>square feet</strong> is 100, then the above proof shows that the new <span class="arithmatex">\(\hat{\beta}_1\)</span>will be multiplied by 10, becoming 1000, therefore, the interpretation of the coefficients did not change.</p>
+<p>However, if you are using Gradient Descent (an optimization algorithm) in Regression, then centering, or scaling the variables, may prove to be faster for convergence.</p>
+<hr />
+<h2 id="hypothesis-testing-on-beta">Hypothesis Testing on <span class="arithmatex">\(\beta\)</span></h2>
+<p>Recall that we are ultimately always interested in drawing conclusions about the population, not the particular sample we observed. This is an important sentence to understand, the reason we are testing our hypothesis on the population parameter instead of the estimated parameter is because we are interested in knowing our real population parameter, and we are using the estimated parameter to provide some statistical gauge. In the SLR setting, we are often interested in learning about the population intercept <span class="arithmatex">\(\beta_0\)</span> and the population slope <span class="arithmatex">\(β_1\)</span>. As you know, <strong>confidence intervals and hypothesis tests</strong> are two related, but different, ways of learning about the values of population parameters. Here, we will learn how to calculate confidence intervals and conduct different hypothesis tests for both <span class="arithmatex">\(\beta_0\)</span> and <span class="arithmatex">\(\beta_1\)</span>.We turn our heads back to the SLR section, because when we ingest and digest concepts, it is important to start from baby steps first and generalize.</p>
+<p>As we can see above from both the fitted plot and the OLS coefficients, there does seem to be a linear relationship between the two. Furthermore, the OLS regression line's equation can be easily calculated and given by (note I have not divided the price unit by <span class="arithmatex">\(1000\)</span> here):</p>
+<div class="arithmatex">\[\hat{y} = 71000+135x\]</div>
+<p>And so we know the <strong>estimated</strong> slope parameter <span class="arithmatex">\(\hat{β_1}\)</span> is <span class="arithmatex">\(135\)</span>, and apparently there exhibits a "relationship" between <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>. Remember, if there is no relationship, then our optimal <strong>estimated</strong> parameter <span class="arithmatex">\(\hat{\beta}_1\)</span> should be 0, as a coefficient of <span class="arithmatex">\(0\)</span> means that <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> has no relationship (or at least in the linear form, the same however, cannot be said for non-linear models!). But be careful, although we can be certain that there is a relationship between <code>house area</code> and the <code>sale price</code>, but it is only <strong>limited</strong> to the <span class="arithmatex">\(47\)</span> ****samples that we have!</p>
+<p>In fact, we want to know if there is a relationship between the <strong><em>population</em></strong> of all of the <code>house area</code> and its corresponding <code>sale price</code> in the whole <strong>population (country). It follows that we also want to ascertain that</strong> <strong>the true population slope</strong> <span class="arithmatex">\(β_1\)</span>is <strong>unlikely</strong> to be 0 as well. Note that <span class="arithmatex">\(0\)</span> is a common benchmark we use in linear regression, but it, in fact can be any number. This is why we have to draw <strong>inferences</strong> from <span class="arithmatex">\(\hat{β}_1\)</span> to make substantiate conclusion on the true population slope <span class="arithmatex">\(β_1\)</span>.</p>
+<p>Let us formulate our question/hypothesis by asking the question: <strong>Do our <code>house area</code> and <code>sale price</code> exhibit a true linear relationship in our population? Can we make inferences of our true population parameters based on the estimated parameters (OLS estimates)?</strong></p>
+<p>Thus, we can use the infamous scientific method <strong>Hypothesis Testing</strong> by defining our null hypothesis and alternate hypothesis as follows:</p>
+<ul>
+<li>Null Hypothesis <span class="arithmatex">\(H_0\)</span>: <span class="arithmatex">\(β_1=0\)</span></li>
+<li>Alternative Hypothesis <span class="arithmatex">\(H_1\)</span>: <span class="arithmatex">\(β_1\neq 0\)</span></li>
+</ul>
+<p>Basically, the null hypothesis says that <span class="arithmatex">\(β_1=0\)</span>, indicating that there is no relationship between <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(y\)</span>. Indeed, if <span class="arithmatex">\(β_1=0\)</span>, our original model reduces to <span class="arithmatex">\(y=β_0+ε\)</span>, and this shows <span class="arithmatex">\(X\)</span> does not depend on <span class="arithmatex">\(y\)</span> at all. To test the <strong>null hypothesis</strong>, we <strong>instead</strong> need to determine whether <span class="arithmatex">\(\hat{\beta}_1\)</span>, our OLS estimate for <span class="arithmatex">\(β_1\)</span>, is <strong><em>sufficiently far from 0</em></strong> so that we are <strong>confident</strong> that the real parameter <span class="arithmatex">\(β_1\)</span> is non-zero. Note the distinction here that we emphasized that we are performing a hypothesis testing on the <strong>true population parameter</strong> but we depend on the value of the <strong>estimate of the true population parameter since we have no way to know the underlying true population parameter.</strong></p>
+<hr />
+<h3 id="t-statistics">T-Statistics</h3>
+<p>In statistics, the <strong>t-statistic</strong> is the ratio of the difference of the <strong>estimated</strong> value of a true population parameter from its <strong>hypothesized</strong> value to its <strong>standard error</strong>. A good intuitive of <a href="https://blog.minitab.com/blog/statistics-and-quality-data-analysis/what-is-a-t-test-and-why-is-it-like-telling-a-kid-to-clean-up-that-mess-in-the-kitchen">explanation of t-statistics can be read here</a>.</p>
+<p>Let <span class="arithmatex">\(\hat{\mathbf{\beta}}\)</span> be an estimator of <span class="arithmatex">\(\mathbf{\beta}\)</span> in some statistical model. Then a <strong>t-statistic</strong> for this parameter <span class="arithmatex">\(\mathbf{\beta}\)</span> is any quantity of the form </p>
+<div class="arithmatex">\[t_{\hat{\mathbf{\beta}}} = \dfrac{\hat{\mathbf{\beta}} - \mathbf{\beta}_H}{\text{SE}(\hat{\mathbf{\beta}})}\]</div>
+<p>where <span class="arithmatex">\(\mathbf{\beta}_H\)</span> is the value we want to test in the hypothesis. By default, statistical software sets <span class="arithmatex">\(\mathbf{\beta}_H = 0\)</span>.</p>
+<p>In the regression setting, we further take note that the <strong>t-statistic</strong> for each individual coefficient <span class="arithmatex">\(\hat{\beta}_i\)</span> is given by </p>
+<div class="arithmatex">\[t_{\hat{\mathbf{\beta}}i} = [t_{\hat{\mathbf{\beta}}}]_{(i+1) \times (i+1)}\]</div>
+<p><strong><em>If our null hypothesis is really true, that</em></strong> <span class="arithmatex">\(β_1=0\)</span><strong><em>, then if we calculate our t-value to be 0, then we can understand it as the number of standard deviations that</em></strong> <span class="arithmatex">\(\hat{β}_1\)</span> <strong><em>is 0, which means that</em></strong> <span class="arithmatex">\(\hat{\beta}_1\)</span> <strong><em>is 0. This might be hard to reconcile at first, but if we see the formula of the t-statistics, and that by definition we set</em></strong> <span class="arithmatex">\(\beta_H=0\)</span>, then it is apparent that if <span class="arithmatex">\(t_{\hat{\beta}}=0\)</span>, it forces the formula to become <span class="arithmatex">\(t_{\hat{\beta}}=0=\dfrac{\hat{\beta}-0}{\text{SE}(\hat{\beta})} \Longrightarrow \hat{\beta}=0\)</span> ; even more concretely with an example, we replace <span class="arithmatex">\(\beta_{H}\)</span> with our favorite <strong>true population parameter</strong> <span class="arithmatex">\(\beta_1\)</span> and <span class="arithmatex">\(\hat{\beta}\)</span> with <span class="arithmatex">\(\hat{\beta}_1\)</span>, then it just means that if <span class="arithmatex">\(\beta_1\)</span> were really <span class="arithmatex">\(0\)</span>, i.e. no relationship of <span class="arithmatex">\(y\)</span> and <span class="arithmatex">\(x_1\)</span>, and if we also get <span class="arithmatex">\(t_{\hat{\beta}_1}\)</span>to be 0 as well (To re-explain this part as a bit cumbersome). <strong><em>In which case we accept the null hypothesis; on the other hand, if our t-value is none-zero, it means that</em></strong> <span class="arithmatex">\(\hat{\beta}_1≠0\)</span><strong><em>)</em></strong></p>
+<p>Consequently, we can conclude that greater the magnitude of <span class="arithmatex">\(|t|\)</span> (<span class="arithmatex">\(t\)</span> can be either positive or negative), the greater the evidence to reject the null hypothesis. The closer <span class="arithmatex">\(t\)</span> is to 0, the more likely there isn’t a significant evidence to reject the null hypothesis.</p>
+<hr />
+<h2 id="time-complexity">Time Complexity</h2>
+<p>Time Complexity is an important topic, you do not want your code to run for 1 billion years, and therefore, an efficient code will be important to businesses. That is also why Time Complexity questions are becoming increasingly popular in Machine Learning and Data Science interviews!</p>
+<p>The Linear Algorithm that we used here simply uses matrix multiplication. We will also ignore the codes that are of constant time O(1). For example, <code>self.coef_=None</code> in the constructor is O(1) and we do not really wish to consider this in the <em>grand scheme of things.</em></p>
+<p>What is the really important ones are in code lines 37–40. Given X to be a m by n matrix/array, where m is the number of samples and n the number of features. In addition, y is a m by 1 vector. Refer to this <a href="https://en.wikipedia.org/wiki/Computational_complexity_of_mathematical_operations">Wikipedia Page</a> for a handy helpsheet on the various time complexity for mathematical operations.</p>
+<p>Line 37: <code>np.dot(X.T,X)</code> In the dot product, we transpose the m × n matrix to become n × m, this operation takes O(m × n) time because we are effectively performing two for loops. Next up is performing matrix multiplication, note carefully that <code>np.dot</code> between two 2-d arrays does not mean <a href="https://stackoverflow.com/questions/3744094/time-and-space-complexity-of-vector-dot-product-computation#:~:text=Assuming%20that%20multiplication%20and%20addition,computed%2C%20i.e.%20ai%20*%20bi%20.">dot product</a>, instead they are matrix multiplication, which takes O(m × n²) time. The output matrix of this step is n× n.</p>
+<p>Line 38: Inverting a n × n matrix takes n³ time. The output matrix is n × n.</p>
+<p>Line 39: Now we perform matrix multiplication of n × n and n × m, which gives O(m × n²), the output matrix is n × m.</p>
+<p>Line 40: Lastly, the time complexity is O(m × n).</p>
+<p>Adding them all up gives you O(2mn+2mn²+n³) whereby simple triangle inequality of mn&lt;mn² implies we can remove the less dominant 2mn term. In the end, the run time complexity of this Linear Regression Algorithm using Normal Equation is O(n²(m+n)). However, you noticed that there are two variables in the bigO notation, and you wonder if we can further reduce the bigO notation to a single variable? Well, if the number of variables is small, which means n is kept small and maybe constant, we can reduce the time complexity to O(m), however, if your variables are increasing, then your time complexity will explode if n → ∞.</p>
+<p>This ends the first series, and also the first article published by me. Stay tuned for updates and see me code various Machine Learning Algorithms from scratch.</p>
+<hr />
+<h2 id="preamble-for-the-next-series-on-linear-regression"><strong>Preamble for the next series on Linear Regression</strong></h2>
+<p>Just a heads up, I may not be doing part II of the series for Linear Regression just yet, as I want to cover a wide variety of algorithms on a surface level, just enough for beginners (or intermediate) learners. However, as a preamble, I will definitely include more and touch on the following topics that are not covered in today’s session.</p>
+<h2 id="orthogonalization"><strong>Orthogonalization</strong></h2>
+<p>We can speed up the Normal Equation’s time complexity by using a technique called Orthogonalization, whereby we make use of <a href="http://mlwiki.org/index.php/QR_Factorization">QR Factorization</a> so we do not need to invert the annoying <span class="arithmatex">\(X^TX\)</span> where it took n³ time!</p>
+<h2 id="regularization"><strong>Regularization</strong></h2>
+<p>You basically cannot leave Linear Models without knowing L1–2 Regularization! The Ridge, Lasso, and the ElasticNet! Note that Regularization is a broad term that traverses through all Machine Learning Models. Stay tuned on understanding how Regularization can reduce overfitting. In addition, one caveat that I didn’t mention is what if <span class="arithmatex">\(X^TX\)</span> is not invertible in our Normal Equation? This can happen if some columns of X are linearly dependent (redundancy in our feature variables), or there are too many features whereby somehow… the number of training samples m is lesser than the number of features n. If you use say, Ridge Regression, then the Modified Normal Equation guarantees a solution. We will talk about it in Part II of Linear Regression.</p>
+<h2 id="statistical-and-interpretation-of-linear-regression"><strong>Statistical and Interpretation of Linear Regression</strong></h2>
+<p>I didn’t mention much about how to interpret Linear Regression. This is important, even if you know how to code up a Linear Regression Algorithm from scratch, if you do not know how to interpret the results in a statistically rigorous way, then that is not meaningful! Learn more on Hypothesis Testing, Standard Errors, and Confidence Levels. I may delve a bit on Maximum Likelihood Estimators as well!</p>
+<p>Conclusion on what I learnt in this few days:</p>
+<ol>
+<li>Returning <code>self</code> by method chaining.</li>
+<li>Using Decorators in Python where I have to call <code>raise xxx error</code> multiple times throughout the classes, which is annoying. Reference from <a href="https://stackoverflow.com/questions/24024966/try-except-every-method-in-class">StackOverFlow</a>. And <a href="https://realpython.com/primer-on-python-decorators/">Real Python</a>.</li>
+</ol>
+<hr />
+<h2 id="python-implementation">Python Implementation</h2>
+<ul>
+<li>One Hundred Page ML Book, CS229, ML Glossary, GeeksforGeeks.</li>
+<li>Take input <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(y\)</span> → Use either closed form solution or Gradient Descent. And remember <span class="arithmatex">\(y = X\beta\)</span>, use this everywhere for vectorization.</li>
+<li>Gradient Descent<ol>
+<li>Define Cost Function to be MSE = <span class="arithmatex">\(\frac{1}{N}\sum_{i=1}^{N}(y_i-\hat{y}_i)^2\)</span></li>
+<li>In order to compute the gradient, we can vectorize it as such: <span class="arithmatex">\(\nabla\)</span>MSE = <span class="arithmatex">\(-\frac{2}{N}(y_{true} - y_{pred}) @ X\)</span>; This is because y_true - y_pred gives you a 1xN vector, whereby X gives you a N x (n+1) vector. Multiplying them give us 1x(n+1) vector, which is the gradient vector of MSE, looks like <span class="arithmatex">\([\beta_0, \beta_1, ..., \beta_n]\)</span>. Note <span class="arithmatex">\(\sum_{i=1}^{N}\)</span>is omitted due to vectorizing.</li>
+<li>Note <code>y_pred</code> is calculated by <code>X @ B</code></li>
+<li>Question: Verify by hand that the above gradient vector is true and derive it by calculus.</li>
+</ol>
+</li>
+</ul>
+<h2 id="references-and-citations">References and Citations</h2>
+<ul>
+<li>
+<p><a href="https://statisticsbyjim.com/regression/">Statistics by Jim - Regression</a></p>
+<p><a href="https://statisticsbyjim.com/regression/interpret-coefficients-p-values-regression/">Interpreting MLR Coefficients and P-values</a></p>
+<p><a href="https://blog.minitab.com/en/adventures-in-statistics-2/regression-analysis-how-do-i-interpret-r-squared-and-assess-the-goodness-of-fit">Goodness of Fit and R-Squared</a></p>
+<p><a href="https://blog.minitab.com/en/statistics-and-quality-data-analysis/what-is-a-t-test-and-why-is-it-like-telling-a-kid-to-clean-up-that-mess-in-the-kitchen">T-Test</a></p>
+</li>
+</ul>
+<p><a href="http://mlwiki.org/index.php/Normal_Equation">Normal Equation (ML Wiki) Wholesome and Mathematically Rigorous</a> (This is a must read)</p>
+<p><a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">Ordinary Least Squares Wikipedia</a></p>
+<p><a href="https://jeffmacaluso.github.io/post/LinearRegressionAssumptions/">Linear Regression Assumptions by Jeff Macaluso from Microsoft</a></p>
+<p><a href="http://statweb.stanford.edu/~jtaylo/courses/stats203/">Stanford's STATS203 class - Consider downloading them before it's gone</a></p>
+<p><a href="https://www.kaggle.com/shrutimechlearn/step-by-step-assumptions-linear-regression">Kaggle Linear Regression Assumptions</a></p>
+<p><a href="https://online.stat.psu.edu/stat462/node/164/">Linear Regression Additive Effects (PSU STATS462)</a></p>
+<p><a href="https://mylearningsinaiml.wordpress.com/concepts/regression/hands-on-linear-regression/">Hands on Linear Regression</a></p>
+<p><a href="https://realpython.com/linear-regression-in-python/#multiple-linear-regression">Real Python Linear Regression</a></p>
+<p><a href="https://eli.thegreenplace.net/2014/derivation-of-the-normal-equation-for-linear-regression/">Normal Equation Derivation II</a></p>
+<p><a href="https://stats.stackexchange.com/questions/29781/when-conducting-multiple-regression-when-should-you-center-your-predictor-varia">Feature Scaling does not affect Linear Regressions' validity of Coefficients</a></p>
+<p><a href="https://online.stat.psu.edu/stat462/">Hypothesis Testing on Optimal Coefficients</a></p>
+<p><a href="https://stats.stackexchange.com/questions/220507/linear-regression-conditional-expectations-and-expected-values/220509#220509">Conditional Mean and Expectation of Linear Regression</a></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.1e84347e.min.js"></script>
+      
+        <script src="../../../javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

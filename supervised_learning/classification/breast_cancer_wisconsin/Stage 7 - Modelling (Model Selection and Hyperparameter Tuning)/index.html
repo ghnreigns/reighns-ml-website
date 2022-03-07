@@ -1,0 +1,1984 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://ghnreigns.github.io/reighns-ml-journey/supervised_learning/classification/breast_cancer_wisconsin/Stage%207%20-%20Modelling%20%28Model%20Selection%20and%20Hyperparameter%20Tuning%29/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.5">
+    
+    
+      
+        <title>Modelling (Model Selection) - Hongnan G. Machine Learning Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.cdeb8541.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../../css/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dependencies-and-configuration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Hongnan G. Machine Learning Projects" class="md-header__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hongnan G. Machine Learning Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Modelling (Model Selection)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Hongnan G. Machine Learning Projects" class="md-nav__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Hongnan G. Machine Learning Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../getting_started/" class="md-nav__link">
+        Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../git.md" class="md-nav__link">
+        git
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../misc/gcp/" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Machine Learning" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Supervised Learning Theory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Supervised Learning Theory" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Supervised Learning Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        Regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2" type="checkbox" id="__nav_5_1_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2">
+          Classification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Classification" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1" type="checkbox" id="__nav_5_1_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1">
+          Projects
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projects" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Projects
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1_1" type="checkbox" id="__nav_5_1_2_1_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1_1">
+          Breast Cancer Wisconsin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Breast Cancer Wisconsin" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_1_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Breast Cancer Wisconsin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%200%20-%20Introduction%20and%20Problem%20Statement/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%201%20-%20Preliminary%20Data%20Inspection%20and%20Cleaning/" class="md-nav__link">
+        Preliminary Data Inspection and Cleaning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%202%20-%20Preliminary%20EDA/" class="md-nav__link">
+        EDA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%203%20-%20Feature%20Engineering/" class="md-nav__link">
+        Feature Engineering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%204%20-%20Modelling%20%28Metric%20to%20Optimize%29/" class="md-nav__link">
+        Modelling (Metrics)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%205%20-%20Modelling%20%28Cross-Validation%20Methodology%29/" class="md-nav__link">
+        Modelling (Cross-Validation Schema)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%206%20-%20Modelling%20%28Preprocessing%20and%20Spot%20Checking%29/" class="md-nav__link">
+        Modelling (Preprocessing and Spot Checking)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Modelling (Model Selection)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Modelling (Model Selection)
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies-and-configuration" class="md-nav__link">
+    Dependencies and Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utils-and-configurations" class="md-nav__link">
+    Utils and Configurations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-selection-hyperparameter-tuning-with-gridsearchcv" class="md-nav__link">
+    Model Selection: Hyperparameter Tuning with GridSearchCV
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Selection: Hyperparameter Tuning with GridSearchCV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#make-finetuning-pipeline" class="md-nav__link">
+    Make Finetuning Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-space" class="md-nav__link">
+    Search Space
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-persistence-saving-models" class="md-nav__link">
+    Model Persistence (Saving Models)
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Persistence (Saving Models)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wandb" class="md-nav__link">
+    Wandb
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#joblib" class="md-nav__link">
+    Joblib
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sanity-check" class="md-nav__link">
+    Sanity Check
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrain-using-hyperparameters" class="md-nav__link">
+    Retrain using Hyperparameters
+  </a>
+  
+    <nav class="md-nav" aria-label="Retrain using Hyperparameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retrain-on-k-folds" class="md-nav__link">
+    Retrain on K-Folds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrain-on-the-whole-training-set" class="md-nav__link">
+    Retrain on the whole training set
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%208%20-%20Modelling%20%28Model%20Evaluation%20and%20Interpretation%29/" class="md-nav__link">
+        Modelling (Model Evaluation)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Deep Learning with PyTorch
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Deep Learning with PyTorch" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Deep Learning with PyTorch
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1">
+          Computer Vision
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Computer Vision" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Computer Vision
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1_1" type="checkbox" id="__nav_6_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1_1">
+          General
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="General" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          General
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../deep_learning/computer_vision/general/image_normalization/Image_Normalization_and_Standardization.md" class="md-nav__link">
+        Image Normalization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../deep_learning/computer_vision/general/visualizing_convolutional_filters/Visualizing%20Convolutional%20Filters/" class="md-nav__link">
+        Visualizing Convolutional Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../deep_learning/computer_vision/general/freeze_layers/freezing_layers/" class="md-nav__link">
+        How to freeze Batch Norm Layers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies-and-configuration" class="md-nav__link">
+    Dependencies and Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utils-and-configurations" class="md-nav__link">
+    Utils and Configurations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-selection-hyperparameter-tuning-with-gridsearchcv" class="md-nav__link">
+    Model Selection: Hyperparameter Tuning with GridSearchCV
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Selection: Hyperparameter Tuning with GridSearchCV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#make-finetuning-pipeline" class="md-nav__link">
+    Make Finetuning Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-space" class="md-nav__link">
+    Search Space
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-persistence-saving-models" class="md-nav__link">
+    Model Persistence (Saving Models)
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Persistence (Saving Models)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wandb" class="md-nav__link">
+    Wandb
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#joblib" class="md-nav__link">
+    Joblib
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sanity-check" class="md-nav__link">
+    Sanity Check
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrain-using-hyperparameters" class="md-nav__link">
+    Retrain using Hyperparameters
+  </a>
+  
+    <nav class="md-nav" aria-label="Retrain using Hyperparameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retrain-on-k-folds" class="md-nav__link">
+    Retrain on K-Folds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrain-on-the-whole-training-set" class="md-nav__link">
+    Retrain on the whole training set
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <div align="center">
+<h1>Stage 7: Hyperparameter Tuning</a></h1>
+by Hongnan Gao
+<br>
+</div>
+
+<h2 id="dependencies-and-configuration">Dependencies and Configuration</h2>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">wandb</span>
+<span class="c1"># !pip install -q shap</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">mlxtend</span><span class="o">==</span><span class="mf">0.19.0</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">statsmodels</span><span class="o">==</span><span class="mf">0.13.1</span>
+<span class="c1"># !pip install gcloud == 0.18.3</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">wandb</span>
+<span class="n">wandb</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[34m[1mwandb[0m: [33mWARNING[0m Calling wandb.login() after wandb.init() has no effect.
+
+
+
+
+
+True
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">mlxtend</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">dump</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">from</span> <span class="nn">mlxtend.evaluate</span> <span class="kn">import</span> <span class="n">bias_variance_decomp</span><span class="p">,</span> <span class="n">paired_ttest_5x2cv</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">decomposition</span><span class="p">,</span> <span class="n">dummy</span><span class="p">,</span> <span class="n">ensemble</span><span class="p">,</span> <span class="n">feature_selection</span><span class="p">,</span>
+                     <span class="n">linear_model</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">model_selection</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span>
+                     <span class="n">pipeline</span><span class="p">,</span> <span class="n">preprocessing</span><span class="p">,</span> <span class="n">svm</span><span class="p">,</span> <span class="n">tree</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">statsmodels.regression.linear_model</span> <span class="kn">import</span> <span class="n">OLS</span>
+</code></pre></div>
+<h2 id="utils-and-configurations">Utils and Configurations</h2>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">config</span><span class="p">:</span>
+    <span class="n">raw_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https://storage.googleapis.com/reighns/reighns_ml_projects/docs/supervised_learning/classification/breast-cancer-wisconsin/data/raw/data.csv&quot;</span>
+    <span class="n">processed_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https://storage.googleapis.com/reighns/reighns_ml_projects/docs/supervised_learning/classification/breast-cancer-wisconsin/data/processed/processed.csv&quot;</span>
+    <span class="n">df_folds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https://storage.googleapis.com/reighns/reighns_ml_projects/docs/supervised_learning/classification/breast-cancer-wisconsin/data/processed/df_folds.csv&quot;</span>
+    <span class="n">train_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.9</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1992</span>
+    <span class="n">num_folds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">cv_schema</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;StratifiedKFold&quot;</span>
+    <span class="n">classification_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span>
+
+    <span class="n">target_col</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;diagnosis&quot;</span><span class="p">])</span>
+    <span class="n">unwanted_cols</span> <span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span>  <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;Unnamed: 32&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Plotting</span>
+    <span class="n">colors</span> <span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span><span class="n">field</span><span class="p">(</span><span class="n">default_factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;#fe4a49&quot;</span><span class="p">,</span> <span class="s2">&quot;#2ab7ca&quot;</span><span class="p">,</span> <span class="s2">&quot;#fed766&quot;</span><span class="p">,</span> <span class="s2">&quot;#59981A&quot;</span><span class="p">])</span>
+    <span class="n">cmap_reversed</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;mako_r&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Convert the config object to a dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: The config object as a dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+
+<span class="c1">#     spot_checking_boxplot = &quot;../data/images/spot_checking_boxplot.png&quot;</span>
+<span class="c1">#     oof_confusion_matrix = &quot;../data/images/oof_confusion_matrix.png&quot;</span>
+<span class="c1">#     final_train_confusion_matrix = &quot;../data/images/final_train_confusion_matrix.png&quot;</span>
+<span class="c1">#     precision_recall_threshold_plot = &quot;../data/images/precision_recall_threshold_plot.png&quot;</span>
+<span class="c1">#     roc_plot = &quot;../data/images/roc_plot.png&quot;</span>
+<span class="c1">#     feature_importance = &quot;../data/images/feature_importance.png&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_seeds</span><span class="p">(</span><span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Set seeds for reproducibility.&quot;&quot;&quot;</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">init_logger</span><span class="p">(</span><span class="n">log_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;info.log&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initialize logger.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="n">stream_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+    <span class="n">stream_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">,%H:%M:%S&quot;</span><span class="p">))</span>
+    <span class="n">file_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">log_file</span><span class="p">)</span>
+    <span class="n">file_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">datefmt</span><span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">,%H:%M:%S&quot;</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">stream_handler</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logger</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Utils functions that we need</span>
+
+<span class="k">def</span> <span class="nf">variance_inflation_factor</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">idx_kept</span><span class="p">,</span> <span class="n">vif_idx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute VIF for one feature.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        exog (np.ndarray): Observations</span>
+<span class="sd">        idx_kept (List[int]): Indices of features to consider</span>
+<span class="sd">        vif_idx (int): Index of feature for which to compute VIF</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: VIF for the selected feature</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exog</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">exog</span><span class="p">)</span>
+
+    <span class="n">x_i</span> <span class="o">=</span> <span class="n">exog</span><span class="p">[:,</span> <span class="n">vif_idx</span><span class="p">]</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">idx_kept</span> <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="n">vif_idx</span><span class="p">]</span>
+    <span class="n">x_noti</span> <span class="o">=</span> <span class="n">exog</span><span class="p">[:,</span> <span class="n">mask</span><span class="p">]</span>
+
+    <span class="n">r_squared_i</span> <span class="o">=</span> <span class="n">OLS</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_noti</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">rsquared</span>
+    <span class="n">vif</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">r_squared_i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">vif</span>
+
+<span class="k">class</span> <span class="nc">ReduceVIF</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The base of the class structure is implemented in https://www.kaggle.com/ffisegydd/sklearn-multicollinearity-class;</span>
+<span class="sd">    I heavily modified the class such that it can take in numpy arrays and correctly implemented the fit and transform method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_drop</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thresh</span> <span class="o">=</span> <span class="n">thresh</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_drop</span> <span class="o">=</span> <span class="n">max_drop</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_indices_kept_</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_kept_</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resets the state of predictor columns after each fold.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_indices_kept_</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_kept_</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fits the Recursive VIF on the training folds and save the selected feature names in self.feature_names</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X ([type]): [description]</span>
+<span class="sd">            y ([type], optional): [description]. Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            [type]: [description]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_indices_kept_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_kept_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_vif</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>     
+
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Transforms the Validation Set according to the selected feature names.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X ([type]): [description]</span>
+<span class="sd">            y ([type], optional): [description]. Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            [type]: [description]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">X</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_indices_kept_</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_vif</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;Implements a VIF function that recursively eliminates features.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X (Union[np.ndarray, pd.DataFrame]): [description]</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            [type]: [description]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">feature_names</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">column_indices_kept</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="n">feature_names</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+
+        <span class="n">dropped</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">dropped</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_drop</span><span class="p">:</span>
+            <span class="n">dropped</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="n">max_vif</span><span class="p">,</span> <span class="n">max_vif_col</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">column_indices_kept</span><span class="p">:</span>
+
+                <span class="n">vif</span> <span class="o">=</span> <span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">column_indices_kept</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">max_vif</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">vif</span> <span class="o">&gt;</span> <span class="n">max_vif</span><span class="p">:</span>
+                    <span class="n">max_vif</span> <span class="o">=</span> <span class="n">vif</span>
+                    <span class="n">max_vif_col</span> <span class="o">=</span> <span class="n">col</span>
+
+            <span class="k">if</span> <span class="n">max_vif</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">thresh</span><span class="p">:</span>
+                <span class="c1"># print(f&quot;Dropping {max_vif_col} with vif={max_vif}&quot;)</span>
+                <span class="n">column_indices_kept</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">max_vif_col</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">feature_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">feature_names</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">max_vif_col</span><span class="p">)</span>
+
+                <span class="n">dropped</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">column_indices_kept</span><span class="p">,</span> <span class="n">feature_names</span>
+
+
+<span class="k">def</span> <span class="nf">prepare_y</span><span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Prepare the target variable for the model.</span>
+
+<span class="sd">    If Binary Classification, we need to ravel the array to 1d.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y (np.ndarray): Target variable.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Transformed Target variable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">classification_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span> <span class="k">else</span> <span class="n">y</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="p">()</span>
+
+<span class="n">basic_config</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="c1"># train_config: Dict = Train().to_dict()</span>
+
+<span class="n">global_config</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">basic</span><span class="o">=</span><span class="n">basic_config</span><span class="p">)</span>
+
+<span class="c1"># We can log multiple dict under global_config - in wandb UI, it will show as basic. and train. to show which dict it is referring to.</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;bcw&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">global_config</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># set logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">init_logger</span><span class="p">()</span>
+
+<span class="c1"># set seeding for reproducibility</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">set_seeds</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+
+<span class="c1"># read data</span>
+<span class="n">df_folds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">df_folds</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Assign predictors and target accordingly</span>
+<span class="n">predictor_cols</span> <span class="o">=</span> <span class="n">df_folds</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">target_col</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">target_col</span>
+</code></pre></div>
+<h2 id="model-selection-hyperparameter-tuning-with-gridsearchcv">Model Selection: Hyperparameter Tuning with GridSearchCV</h2>
+<div class="admonition success">
+<p class="admonition-title">Hyperparameter Tuning</p>
+<p>We have done a quick spot checking on algorithms and realized that <code>LogisticRegression</code> is doing well for this task. For this purpose, I will just perform hyperparameter tuning on this single algorithm. However, in practice and if resources are allowed, I will also tune other models such as <code>RandomForest()</code>, or gradient boosting algorithms such as <code>XGBoost</code>, as I believe they will perform no worse than our Logistic Regression model given the right hyperparameters.</p>
+</div>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">Grid Search is the Gwei?</p>
+<p>Meh! We will use an old-fashioned way to search for hyperparameters, which is brute force method. The time complexity of Grid Search is high and if you have many hyperparameters to tune, I recommend trying out <b>Random Grid Search</b> or libraries like <b>Optuna</b> that uses Bayesian Optimization.</p>
+</div>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">TODO</p>
+<p>Try to code up your own <code>GridSearchCV</code> to have maximum flexibility.</p>
+</div>
+<h3 id="make-finetuning-pipeline">Make Finetuning Pipeline</h3>
+<p>The following <code>make_finetuning_pipeline</code> does exactly the same thing is as <code>make_pipeline</code> earlier. The only difference is we can pass in flexible list of steps to the pipeline from outside.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_finetuning_pipeline</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return a pipeline that can be used for finetuning.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (Callable): A model with default parameters.</span>
+<span class="sd">        steps (List[Tuple[str, Callable]]): A list of preprocessing steps to pass in Pipeline object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Pipeline: Returns a pipeline that can be used for finetuning.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="o">*</span><span class="n">steps</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">)])</span>
+
+<span class="c1"># TODO: Make a class to hold pipelines?</span>
+<span class="c1"># class MakePipeline:</span>
+
+<span class="c1">#     def __init__(self, estimator: Callable, steps: List[Callable]):</span>
+<span class="c1">#         pass</span>
+
+<span class="c1">#     def spot_checking_pipeline():</span>
+<span class="c1">#         pass</span>
+
+<span class="c1">#     def fine_tuning_pipeline():</span>
+<span class="c1">#         pass</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">finetuning_pipeline_steps</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># standardization</span>
+    <span class="p">(</span><span class="s2">&quot;standardize&quot;</span><span class="p">,</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()),</span>
+    <span class="c1"># reduce VIF</span>
+    <span class="p">(</span><span class="s2">&quot;remove_multicollinearity&quot;</span><span class="p">,</span> <span class="n">ReduceVIF</span><span class="p">(</span><span class="n">thresh</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="search-space">Search Space</h3>
+<p>Run our hyperparameter search with cross-validation. For example, our <code>param_grid</code> has <span class="arithmatex">\(2 \times 10 = 20\)</span> combinations, and our cross validation has 5 folds, then there will be a total of 100 fits.</p>
+<hr />
+<p>Below details the pseudo code of what happens under the hood:</p>
+<ul>
+<li>Define <span class="arithmatex">\(G\)</span> as the set of combination of hyperparamters. Define number of splits to be <span class="arithmatex">\(K\)</span>.</li>
+<li>For each set of hyperparameter <span class="arithmatex">\(z \in Z\)</span>:<ul>
+<li>for fold <span class="arithmatex">\(j\)</span> in K:<ul>
+<li>Set <span class="arithmatex">\(F_{\text{train}}=\bigcup\limits_{i\neq k}^{K} F_{i}\)</span></li>
+<li>Set <span class="arithmatex">\(F_{\text{val}} = F_{j}\)</span> as the validation set</li>
+<li>Perform Standard Scaling on <span class="arithmatex">\(F_{\text{train}}\)</span> and find the mean and std</li>
+<li>Perform VIF recursively on <span class="arithmatex">\(F_{\text{train}}\)</span> and find the selected features</li>
+<li>Transform <span class="arithmatex">\(F_{\text{val}}\)</span> using the mean and std found using <span class="arithmatex">\(F_{\text{train}}\)</span></li>
+<li>Transform <span class="arithmatex">\(F_{\text{val}}\)</span> to have only the selected features from <span class="arithmatex">\(F_{\text{train}}\)</span></li>
+<li>Train and fit on <span class="arithmatex">\(F_{\text{train}}\)</span> </li>
+</ul>
+</li>
+<li>Evaluate the fitted parameters on <span class="arithmatex">\(F_{\text{val}}\)</span> to obtain <span class="arithmatex">\(\mathcal{M}\)</span></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ModelForTuning</span><span class="p">:</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">param_grid</span><span class="p">:</span> <span class="n">Dict</span>
+</code></pre></div>
+<p>Define our search space for the hyperparameters:</p>
+<div class="highlight"><pre><span></span><code><span class="n">logistic_r_param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="n">model__penalty</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="s2">&quot;l2&quot;</span><span class="p">],</span>
+              <span class="n">model__C</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
+</code></pre></div>
+<p>We conveniently use <code>dataclass</code> to act as a medium so we can pass in model and param_grid independently for each model. We then collate them into a list of <code>ModelForTuning</code> object.</p>
+<div class="highlight"><pre><span></span><code><span class="n">models_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ModelForTuning</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">(</span>
+            <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;saga&quot;</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">seed</span><span class="p">,</span>
+            <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+            <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">param_grid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">model__penalty</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="s2">&quot;l2&quot;</span><span class="p">],</span>
+            <span class="n">model__C</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">ModelForTuning</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">seed</span><span class="p">),</span>
+        <span class="n">param_grid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">model__max_depth</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+            <span class="n">model__min_samples_leaf</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+            <span class="n">model__criterion</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">],</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">ModelForTuning</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">ensemble</span><span class="o">.</span><span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+        <span class="n">param_grid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">model__max_depth</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+            <span class="n">model__learning_rate</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>
+            <span class="n">model__subsample</span><span class="o">=</span><span class="p">[</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="mf">0.5</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optimize_models</span><span class="p">(</span>
+    <span class="n">models_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ModelForTuning</span><span class="p">],</span>
+    <span class="n">X_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">scorer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">],</span>
+    <span class="n">steps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Optimize models in models_list using X_train and y_train.</span>
+<span class="sd">    We are using GridSearchCV to find the best parameters for each model.</span>
+<span class="sd">    Consider using Optuna for hyperparameter optimization (or wandb for hyperparameter optimization).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        models_list (List[ModelForTuning]): List of models to optimize.</span>
+<span class="sd">        X_train (np.ndarray): X_train data.</span>
+<span class="sd">        y_train (np.ndarray): y_train data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        grids (List[Callable]): List of optimized models.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># @ TODO: make a scoring list to pass in so we can evaluate multiple metrics.</span>
+    <span class="n">grids</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">model_selection</span><span class="o">.</span><span class="n">GridSearchCV</span><span class="p">(</span>
+            <span class="n">make_finetuning_pipeline</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">steps</span><span class="p">),</span>
+            <span class="n">param_grid</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">param_grid</span><span class="p">,</span>
+            <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">scoring</span><span class="o">=</span><span class="n">scorer</span><span class="p">,</span>
+            <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models_list</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">grid</span> <span class="ow">in</span> <span class="n">grids</span><span class="p">:</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">grids</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">roc_auc_scorer</span> <span class="o">=</span> <span class="s2">&quot;roc_auc_ovr&quot;</span> 
+<span class="c1"># Unsure why this gives much lower score - to investigate</span>
+<span class="c1"># metrics.make_scorer(metrics.roc_auc_score, average=&quot;macro&quot;, multi_class=&#39;ovr&#39;)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">df_folds</span><span class="p">[</span><span class="n">predictor_cols</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_folds</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">prepare_y</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">grids</span> <span class="o">=</span> <span class="n">optimize_models</span><span class="p">(</span><span class="n">models_list</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">scorer</span><span class="o">=</span><span class="n">roc_auc_scorer</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">finetuning_pipeline_steps</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Fitting 5 folds for each of 20 candidates, totalling 100 fits
+Fitting 5 folds for each of 50 candidates, totalling 250 fits
+Fitting 5 folds for each of 8 candidates, totalling 40 fits
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># The above optimize code is equivalent to the below, for better readability</span>
+<span class="c1"># pipeline_logistic = make_finetuning_pipeline(</span>
+<span class="c1">#     linear_model.LogisticRegression(</span>
+<span class="c1">#         solver=&quot;saga&quot;, random_state=config.seed, max_iter=10000, n_jobs=None, fit_intercept=True</span>
+<span class="c1">#     ), steps=steps</span>
+<span class="c1"># )</span>
+
+<span class="c1"># param_grid = dict(</span>
+<span class="c1">#     model__penalty=[&quot;l1&quot;, &quot;l2&quot;],</span>
+<span class="c1">#     model__C=np.logspace(-4, 4, 10),</span>
+<span class="c1"># )</span>
+
+<span class="c1"># grid = model_selection.GridSearchCV(pipeline_logistic, param_grid=param_grid, cv=5, refit=True, verbose=3, scoring = &quot;roc_auc&quot;)</span>
+<span class="c1"># _ = grid.fit(X_train, y_train)</span>
+</code></pre></div>
+<p>We can save our results in a dataframe, we will also look at the top performing hyperparameter by querying the below:</p>
+<div class="highlight"><pre><span></span><code><span class="n">grid_cv_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">grid_cv_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">grid_cv_df</span><span class="p">[</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># For example, we can see Logistic Regression&#39;s GridSearchCV</span>
+<span class="c1"># results like this.</span>
+<span class="n">grid_cv_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">grid_cv_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">grid_cv_df</span><span class="p">[</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_model__C</th>
+      <th>param_model__penalty</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>split4_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>0.931891</td>
+      <td>0.058794</td>
+      <td>0.002457</td>
+      <td>0.000387</td>
+      <td>0.359381</td>
+      <td>l1</td>
+      <td>{'model__C': 0.3593813663804626, 'model__penal...</td>
+      <td>0.997997</td>
+      <td>0.995547</td>
+      <td>0.997944</td>
+      <td>0.990132</td>
+      <td>0.995477</td>
+      <td>0.995419</td>
+      <td>0.002863</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">return_grid_df</span><span class="p">(</span>
+    <span class="n">grids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">model_selection</span><span class="o">.</span><span class="n">GridSearchCV</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">model_selection</span><span class="o">.</span><span class="n">GridSearchCV</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Return a dataframe of the grids with shorted names.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        grids (List[model_selection.GridSearchCV]): A list of GridSearchCV models that are tuned.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        grid_df, grids (Union[pd.DataFrame, List[model_selection.GridSearchCV]]): A dataframe of the grids with shorted names.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">shorten_param</span><span class="p">(</span><span class="n">param_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;__&quot;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">param_name</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">param_name</span>
+
+    <span class="n">grid_df</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">grid</span> <span class="ow">in</span> <span class="n">grids</span><span class="p">:</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">estimator</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">cv_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+            <span class="s2">&quot;mean_test_score&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+        <span class="c1"># get the parameter names</span>
+        <span class="n">column_results</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;param_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">grid</span><span class="o">.</span><span class="n">param_grid</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+        <span class="n">column_results</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="s2">&quot;mean_test_score&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;std_test_score&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rank_test_score&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">cv_results</span> <span class="o">=</span> <span class="n">cv_results</span><span class="p">[</span><span class="n">column_results</span><span class="p">]</span>
+        <span class="n">cv_results</span> <span class="o">=</span> <span class="n">cv_results</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">shorten_param</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;model_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_name</span>
+        <span class="n">grid_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">grid_df</span><span class="p">,</span> <span class="n">grids</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># grid_df and grids should necessarily be in the same sequence.</span>
+<span class="c1"># grid_df[0] == grids[0] in terms of model information, in this</span>
+<span class="c1"># case, the first index of both should be logistic regression.</span>
+<span class="n">grid_df</span><span class="p">,</span> <span class="n">grids</span> <span class="o">=</span> <span class="n">return_grid_df</span><span class="p">(</span><span class="n">grids</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">model_df</span><span class="p">,</span> <span class="n">grid</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">grid_df</span><span class="p">,</span> <span class="n">grids</span><span class="p">):</span>
+    <span class="n">best_hyperparams_df</span> <span class="o">=</span> <span class="n">model_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">best_hyperparams_df</span><span class="o">.</span><span class="n">model_name</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best hyperparameters found for </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> is as follows:</span><span class="se">\n</span><span class="si">{</span><span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">best_hyperparams_df</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>2021-11-16,09:19:36 - Best hyperparameters found for LogisticRegression is as follows:
+{&#39;model__C&#39;: 0.3593813663804626, &#39;model__penalty&#39;: &#39;l1&#39;}
+2021-11-16,09:19:36 - Best hyperparameters found for LogisticRegression is as follows:
+{&#39;model__C&#39;: 0.3593813663804626, &#39;model__penalty&#39;: &#39;l1&#39;}
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>penalty</th>
+      <th>C</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+      <th>model_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>l1</td>
+      <td>0.359381</td>
+      <td>0.995419</td>
+      <td>0.002863</td>
+      <td>1</td>
+      <td>LogisticRegression</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><code>2021-11-16,09:19:36 - Best hyperparameters found for DecisionTreeClassifier is as follows:
+{&#39;model__criterion&#39;: &#39;entropy&#39;, &#39;model__max_depth&#39;: 10, &#39;model__min_samples_leaf&#39;: 10}
+2021-11-16,09:19:36 - Best hyperparameters found for DecisionTreeClassifier is as follows:
+{&#39;model__criterion&#39;: &#39;entropy&#39;, &#39;model__max_depth&#39;: 10, &#39;model__min_samples_leaf&#39;: 10}
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>max_depth</th>
+      <th>min_samples_leaf</th>
+      <th>criterion</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+      <th>model_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>41</th>
+      <td>10</td>
+      <td>10</td>
+      <td>entropy</td>
+      <td>0.954515</td>
+      <td>0.015913</td>
+      <td>1</td>
+      <td>DecisionTreeClassifier</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><code>2021-11-16,09:19:37 - Best hyperparameters found for GradientBoostingClassifier is as follows:
+{&#39;model__learning_rate&#39;: 0.1, &#39;model__max_depth&#39;: 3, &#39;model__subsample&#39;: 0.5}
+2021-11-16,09:19:37 - Best hyperparameters found for GradientBoostingClassifier is as follows:
+{&#39;model__learning_rate&#39;: 0.1, &#39;model__max_depth&#39;: 3, &#39;model__subsample&#39;: 0.5}
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>max_depth</th>
+      <th>learning_rate</th>
+      <th>subsample</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+      <th>model_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>0.1</td>
+      <td>0.5</td>
+      <td>0.991031</td>
+      <td>0.005869</td>
+      <td>1</td>
+      <td>GradientBoostingClassifier</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Our best performing set of hyperparameters for Logistic Regression <code>{'model__C': 0.3593813663804626, 'model__penalty': 'l1'}</code> gives rise to a mean cross validation score of <span class="arithmatex">\(0.995419\)</span>, which is higher than the model with default hyperparameter scoring, <span class="arithmatex">\(0.995\)</span> by a small margin. Not too surprising for Logistic Regression here since there aren't many things to tune, and should not see major improvements, but for Decesion Tree, it has increased from 0.907 to around 0.95, seeing quite a big jump with tuned params.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">DANGERRRRRRRRRRRRR</p>
+<p>I am being a bit hand wavy in terms of comparison here, I assumed THAT <code>GridSearchCV</code> used the exact same splitting strategy (yes it uses <code>StratifiedKFold</code> here) with the exact <strong>SEED/RANDOM_STATE</strong>, which I cannot promise as of now. Thus, a different splitting will, unfortunately, result in different results, although, I don't expect by a huge margin - so I think it is a no-go to compare like this.
+We can probably pass in a cv function into <code>GridSearchCV</code> to ensure seeding. 
+This also highlights a problem that even K-fold splitting does not guarantee the reduction in variance. </p>
+</div>
+<div class="admonition sucess">
+<p class="admonition-title">Room for Improvement</p>
+<p>Apart from the other methods to search for the optimal hyperparameters, we can also include preprocessing step as a tunable hyperparameter. More specifically, in our <code>ReduceVIF()</code> step, we hard coded two manual criterion in which the algorithm will stop; if the threshold reaches 10, or if the number of features removed hit 20; we can include them in the search space so we do not need to worry about how many features to remove!</p>
+</div>
+<h2 id="model-persistence-saving-models">Model Persistence (Saving Models)</h2>
+<p><a href="https://scikit-learn.org/stable/modules/model_persistence.html">Model Persistence</a></p>
+<p>We save our models using <code>joblib</code> and we can load it back any time. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Save it to wandb or GCP storage to store models for better consistency.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">model_path</span> <span class="o">=</span> <span class="s2">&quot;/content/&quot;</span>
+
+<span class="k">def</span> <span class="nf">save_model</span><span class="p">(</span><span class="n">grids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Save a model to a file&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">grid</span> <span class="ow">in</span> <span class="n">grids</span><span class="p">:</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">path_to_save</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">_grid.joblib&quot;</span><span class="p">)</span>
+        <span class="c1"># Dump to local path</span>
+        <span class="n">dump</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path_to_save</span><span class="p">))</span>
+        <span class="c1"># Dump to wandb cloud</span>
+        <span class="c1"># &quot;model.h5&quot; is saved in wandb.run.dir &amp; will be uploaded at the end of training</span>
+        <span class="n">wandb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wandb</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">path_to_save</span><span class="p">))</span>
+</code></pre></div>
+<p>Save the model!</p>
+<h3 id="wandb">Wandb</h3>
+<p>We first see how we save and load using wandb.</p>
+<div class="highlight"><pre><span></span><code><span class="n">save_model</span><span class="p">(</span><span class="n">grids</span><span class="p">,</span> <span class="n">model_path</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[34m[1mwandb[0m: [33mWARNING[0m Saving files without folders. If you want to preserve sub directories pass base_path to wandb.save, i.e. wandb.save(&quot;/mnt/folder/file.h5&quot;, base_path=&quot;/mnt&quot;)
+[34m[1mwandb[0m: [33mWARNING[0m Saving files without folders. If you want to preserve sub directories pass base_path to wandb.save, i.e. wandb.save(&quot;/mnt/folder/file.h5&quot;, base_path=&quot;/mnt&quot;)
+[34m[1mwandb[0m: [33mWARNING[0m Saving files without folders. If you want to preserve sub directories pass base_path to wandb.save, i.e. wandb.save(&quot;/mnt/folder/file.h5&quot;, base_path=&quot;/mnt&quot;)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">logistic_path</span> <span class="o">=</span> <span class="s2">&quot;LogisticRegression_grid.joblib&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># restore the model file &quot;model.h5&quot; from a specific run by user &quot;lavanyashukla&quot;</span>
+<span class="c1"># in project &quot;save_and_restore&quot; from run &quot;10pr4joa&quot;</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">logistic_path</span><span class="p">)</span>
+
+
+<span class="c1"># use the &quot;name&quot; attribute of the returned object</span>
+<span class="c1"># if your framework expects a filename, e.g. as in Keras</span>
+<span class="c1"># model.load_weights(best_model.name)</span>
+</code></pre></div>
+<h3 id="joblib">Joblib</h3>
+<p>We see how we use <code>joblib</code> to save and load.</p>
+<p>Load the model, and we can test it now if our loaded models is predicting correctly!</p>
+<div class="highlight"><pre><span></span><code><span class="n">logistic_grid</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s2">&quot;/content/LogisticRegression_grid.joblib&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Great it seems to work!</p>
+<h3 id="sanity-check">Sanity Check</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We just make sure our loaded weight from path is the same as the one we trained. We can easily compare predictions (or coefficients) by the following.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">best_model</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="o">==</span> <span class="n">logistic_grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+    <span class="n">X_train</span>
+<span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="o">==</span> <span class="n">grids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>True
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span>
+    <span class="n">y_train</span><span class="p">,</span> <span class="n">logistic_grid</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_train</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">==</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span>
+    <span class="n">y_train</span><span class="p">,</span> <span class="n">grids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_train</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">==</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span>
+    <span class="n">y_train</span><span class="p">,</span> <span class="n">load</span><span class="p">(</span><span class="n">best_model</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_train</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>True
+</code></pre></div>
+<p>Seems like the save and load method works perfectly.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call this directly.
+<div class="highlight"><pre><span></span><code><span class="n">grids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</code></pre></div></p>
+<p>This is because <code>grids[0].best_estimator_["model"]</code> is only referring to the Logistic Regression Model WITHOUT the pipeline (preprocessing) steps. And hence will raise error if the preprocessing steps has feature selection. But the main idea is, be careful when using the above.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># grids[0].best_estimator_[&quot;model&quot;].predict(X_train)</span>
+</code></pre></div>
+<h2 id="retrain-using-hyperparameters">Retrain using Hyperparameters</h2>
+<div class="admonition info">
+<p class="admonition-title">Retraining Methods</p>
+<p>From the discussion<sup id="fnref:cpmp"><a class="footnote-ref" href="#fn:cpmp">1</a></sup>, my doubts are cleared. Quoting verbatim from the discussion, we have:</p>
+</div>
+<p>K-folds cross validation was devised as a way to assess model performance using training data. A great paper on this from Sebastian Raschka is a must read https://arxiv.org/abs/1811.12808. You use K-folds cv to tune you model, then retrain on all training data with best hyperparamters found.</p>
+<p>However, once you have run K-fold cv, you get <span class="arithmatex">\(K\)</span> trained models. Kagglers quickly found that ensembling these models was giving good results at zero computation cost, rather than having to retrain a model on full data. It soon became a very common practice.</p>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">Takeway</p>
+<p>For small-medium datasets, after finding the best hyperparameters <span class="arithmatex">\(G\)</span>, we use <span class="arithmatex">\(G\)</span> in our model <span class="arithmatex">\(h\)</span> to train on the whole dataset <span class="arithmatex">\(\mathcal{X}\)</span> again to get the fitted parameters of <span class="arithmatex">\(h\)</span>. Then you use the newly gained fitted parameters to then evaluate on the <strong>Test Set</strong>.
+For large and computationally expensive datasets, when you finished your K-folds, say 5 folds, you get 5 "different" models, <span class="arithmatex">\(h_{i}, i \in {1, 2, 3, 4, 5}\)</span>, what you can do is to save the weights (or in normal ML, weights refer to the parameters gained), and evaluate on the test set for each of the five models, you then get 5 different test predictions, and a common practice is the do a simple mean of these 5 set of predictions. </p>
+</div>
+<h3 id="retrain-on-k-folds">Retrain on K-Folds</h3>
+<p>TODO: This should be easy for me as I dabbled more in Kaggle comp and are more familiar with this methodology.</p>
+<h3 id="retrain-on-the-whole-training-set">Retrain on the whole training set</h3>
+<p>A common practice after the hyperparameter tuning phase is to retrain the model on the whole dataset <span class="arithmatex">\(X_{\text{train}}\)</span> where we will get the estimator's coefficients obtained from the retraining. This is actually already done as the scikit-learn's <code>GridSearchCV</code> has a parameter <code>refit</code>; if we select it to be true, then after the model selection process is done (i.e. getting the best hyperparameters after cross validation with grid search), the grid search object will retrain on the whole <span class="arithmatex">\(X_{\text{train}}\)</span> with the best hyperparameters internally, and return us back an object in which we can call <code>predict</code> etc.</p>
+<div class="admonition warning">
+<p class="admonition-title">Paranoia Alert</p>
+<p>However, to be extra careful, we can retrain manually using the best hyperparameters and check if scikit-learn is true to its documentation. We will just reconstruct the pipeline using the grid's best hyper parameters. We will then test if the retrained model's coefficients coincide with the grid's best estimator's coefficients. If there difference is 0, this means they are trained under the same circumstances and we can be sure that the refit parameter is behaving true to its words.</p>
+<div class="highlight"><pre><span></span><code><span class="n">grid_best_hyperparams</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid_best_hyperparams</span><span class="p">)</span> <span class="o">-&gt;</span>
+<span class="p">{</span><span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="mf">0.3593813663804626</span><span class="p">,</span> <span class="s1">&#39;model__penalty&#39;</span><span class="p">:</span> <span class="s1">&#39;l1&#39;</span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">retrain_logistic_pipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;standardize&quot;</span><span class="p">,</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;remove_multicollinearity&quot;</span><span class="p">,</span> <span class="n">ReduceVIF</span><span class="p">(</span><span class="n">thresh</span><span class="o">=</span><span class="mi">10</span><span class="p">)),</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">,</span>
+            <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">(</span>
+                <span class="n">C</span><span class="o">=</span><span class="mf">0.3593813663804626</span><span class="p">,</span>
+                <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="mi">1992</span><span class="p">,</span>
+                <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;saga&quot;</span><span class="p">,</span>
+                <span class="n">penalty</span><span class="o">=</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">retrain_logistic_pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">logistic_grid</span> <span class="o">=</span> <span class="n">grids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">coef_diff</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">retrain_logistic_pipeline</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span>
+    <span class="o">-</span> <span class="n">logistic_grid</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">coef_diff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Retraining Assertion Passed!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>2021-11-16,09:19:38 - Retraining Assertion Passed!
+2021-11-16,09:19:38 - Retraining Assertion Passed!
+
+
+...
+</code></pre></div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:cpmp">
+<p>https://www.kaggle.com/c/ventilator-pressure-prediction/discussion/275883&#160;<a class="footnote-backref" href="#fnref:cpmp" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../Stage%206%20-%20Modelling%20%28Preprocessing%20and%20Spot%20Checking%29/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Modelling (Preprocessing and Spot Checking)" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Modelling (Preprocessing and Spot Checking)
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Stage%208%20-%20Modelling%20%28Model%20Evaluation%20and%20Interpretation%29/" class="md-footer__link md-footer__link--next" aria-label="Next: Modelling (Model Evaluation)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Modelling (Model Evaluation)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../../assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.1e84347e.min.js"></script>
+      
+        <script src="../../../../javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

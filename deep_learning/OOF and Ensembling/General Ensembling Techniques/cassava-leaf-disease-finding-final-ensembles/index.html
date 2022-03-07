@@ -1,0 +1,1066 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://ghnreigns.github.io/reighns-ml-journey/deep_learning/OOF%20and%20Ensembling/General%20Ensembling%20Techniques/cassava-leaf-disease-finding-final-ensembles/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.5">
+    
+    
+      
+        <title>Finding good ensembles to submit in competition - Hongnan G. Machine Learning Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.cdeb8541.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../../css/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#finding-good-ensembles-to-submit-in-competition" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Hongnan G. Machine Learning Projects" class="md-header__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hongnan G. Machine Learning Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Finding good ensembles to submit in competition
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Hongnan G. Machine Learning Projects" class="md-nav__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Hongnan G. Machine Learning Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../getting_started/" class="md-nav__link">
+        Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../git.md" class="md-nav__link">
+        git
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../misc/gcp/" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Machine Learning" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Supervised Learning Theory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Supervised Learning Theory" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Supervised Learning Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        Regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2" type="checkbox" id="__nav_5_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2">
+          Classification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Classification" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1" type="checkbox" id="__nav_5_1_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1">
+          Projects
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projects" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Projects
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1_1" type="checkbox" id="__nav_5_1_2_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1_1">
+          Breast Cancer Wisconsin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Breast Cancer Wisconsin" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_1_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Breast Cancer Wisconsin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%200%20-%20Introduction%20and%20Problem%20Statement/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%201%20-%20Preliminary%20Data%20Inspection%20and%20Cleaning/" class="md-nav__link">
+        Preliminary Data Inspection and Cleaning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%202%20-%20Preliminary%20EDA/" class="md-nav__link">
+        EDA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%203%20-%20Feature%20Engineering/" class="md-nav__link">
+        Feature Engineering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%204%20-%20Modelling%20%28Metric%20to%20Optimize%29/" class="md-nav__link">
+        Modelling (Metrics)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%205%20-%20Modelling%20%28Cross-Validation%20Methodology%29/" class="md-nav__link">
+        Modelling (Cross-Validation Schema)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%206%20-%20Modelling%20%28Preprocessing%20and%20Spot%20Checking%29/" class="md-nav__link">
+        Modelling (Preprocessing and Spot Checking)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%207%20-%20Modelling%20%28Model%20Selection%20and%20Hyperparameter%20Tuning%29/" class="md-nav__link">
+        Modelling (Model Selection)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../supervised_learning/classification/breast_cancer_wisconsin/Stage%208%20-%20Modelling%20%28Model%20Evaluation%20and%20Interpretation%29/" class="md-nav__link">
+        Modelling (Model Evaluation)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Deep Learning with PyTorch
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Deep Learning with PyTorch" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Deep Learning with PyTorch
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1">
+          Computer Vision
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Computer Vision" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Computer Vision
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1_1" type="checkbox" id="__nav_6_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1_1">
+          General
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="General" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          General
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../computer_vision/general/image_normalization/Image_Normalization_and_Standardization.md" class="md-nav__link">
+        Image Normalization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../computer_vision/general/visualizing_convolutional_filters/Visualizing%20Convolutional%20Filters/" class="md-nav__link">
+        Visualizing Convolutional Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../computer_vision/general/freeze_layers/freezing_layers/" class="md-nav__link">
+        How to freeze Batch Norm Layers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="finding-good-ensembles-to-submit-in-competition">Finding good ensembles to submit in competition</h1>
+<p>We tried different types of ensembles (e.g., means and meta learners). Our best submissions used a stacked mean approach and weights found via an optimization. These submissions scored around 91.3% on the public and also private leaderboard.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">differential_evolution</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span> 
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">chain</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h1 id="loading-out-of-fold-predictions-for-some-of-our-tested-models">Loading Out-of-Fold Predictions for some of our tested models</h1>
+<div class="highlight"><pre><span></span><code><span class="n">oof_predictions_v3</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;../input/cassava-leaf-disease-ensemble-tests/oof_v04 (1).pkl&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">oof_predictions_v3</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>image_id</th>
+      <th>label</th>
+      <th>resnext</th>
+      <th>b5</th>
+      <th>mobilenet</th>
+      <th>vit2020</th>
+      <th>b4</th>
+      <th>vit2019</th>
+      <th>b3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1000015157.jpg</td>
+      <td>0</td>
+      <td>[0.53539234, 0.08993052, 0.032574702, 0.010111...</td>
+      <td>[0.17068666, 0.28306848, 0.40483505, 0.0044726...</td>
+      <td>[0.7490078, 0.014262087, 0.005231139, 0.000635...</td>
+      <td>[0.42902824, 0.045752272, 0.31388378, 0.005485...</td>
+      <td>[0.29917482, 0.16379356, 0.2504335, 0.06966855...</td>
+      <td>[0.4443596, 0.21404053, 0.24348898, 0.01078206...</td>
+      <td>[0.12975824, 0.41058695, 0.1588993, 0.02674331...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1000201771.jpg</td>
+      <td>3</td>
+      <td>[3.361342e-07, 5.867391e-07, 5.65951e-05, 0.99...</td>
+      <td>[2.970924e-05, 0.0012548971, 1.7456967e-05, 0....</td>
+      <td>[0.00012562818, 0.00018958043, 0.0020241379, 0...</td>
+      <td>[1.8922072e-05, 7.141115e-05, 3.6473248e-05, 0...</td>
+      <td>[0.017034736, 0.033697814, 0.028847465, 0.8960...</td>
+      <td>[8.799362e-06, 4.8696966e-05, 1.5933587e-05, 0...</td>
+      <td>[0.020895468, 0.025896251, 0.037321843, 0.8942...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100042118.jpg</td>
+      <td>1</td>
+      <td>[0.005370396, 0.07950499, 0.017187783, 0.10000...</td>
+      <td>[0.0038973298, 0.12563738, 0.008966217, 0.0198...</td>
+      <td>[0.019499786, 0.06108744, 0.005322082, 0.21714...</td>
+      <td>[0.0003110762, 0.00180416, 0.02432872, 0.00174...</td>
+      <td>[0.054800056, 0.3077832, 0.08947, 0.08236225, ...</td>
+      <td>[0.00047566573, 0.0014882263, 0.007440664, 0.0...</td>
+      <td>[0.020274838, 0.11426823, 0.034628984, 0.07325...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h1 id="mean-and-stacked-mean-combinations">Mean and Stacked Mean combinations</h1>
+<p>We used itertools.combinations to check all possible combinations for mean ensembles. In addition to the individual models, we also combined some models in advance. This was an easy way to try out the different combinations including diverse levels. In most cases, the calculated cross-validation scores were quite close to the public leaderboard results. Even after the final submission, the combinations proved to be very stable.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build some promising stacks for evaluation</span>
+<span class="n">oof_predictions_v3</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;vits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">oof_predictions_v3</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;vit2019&quot;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;vit2020&quot;</span><span class="p">])],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">oof_predictions_v3</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;vit_resnext&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">oof_predictions_v3</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;vit2020&quot;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;resnext&quot;</span><span class="p">])],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">columns</span> <span class="o">=</span> <span class="n">oof_predictions_v3</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">combined</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)):</span>
+    <span class="n">combined</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">evaluate_ensemble</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">[[</span><span class="o">*</span><span class="n">columns</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">])]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">combined</span><span class="p">))))</span> <span class="k">as</span> <span class="n">process_bar</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">combined</span><span class="p">)):</span>
+        <span class="n">process_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  
+        <span class="n">results</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">oof_predictions_v3</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">evaluate_ensemble</span><span class="p">(</span><span class="n">oof_predictions_v3</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>100%|██████████| 511/511 [19:03&lt;00:00,  2.24s/it]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get top-50 combinations</span>
+<span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>{(&#39;mobilenet&#39;, &#39;b4&#39;, &#39;vit_resnext&#39;): 0.9103145300743095,
+ (&#39;mobilenet&#39;, &#39;b3&#39;, &#39;vit_resnext&#39;): 0.9092863485535355,
+ (&#39;mobilenet&#39;, &#39;b4&#39;, &#39;b3&#39;, &#39;vit_resnext&#39;): 0.9092863485535355,
+ (&#39;mobilenet&#39;, &#39;b4&#39;, &#39;b3&#39;): 0.909239613029864,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;): 0.9091928775061925,
+ (&#39;mobilenet&#39;, &#39;vit_resnext&#39;): 0.9090994064588493,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;vit_resnext&#39;): 0.9089591998878347,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b3&#39;): 0.9087722577931485,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;b3&#39;): 0.908632051222134,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;vit_resnext&#39;): 0.9085385801747908,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b3&#39;, &#39;vit_resnext&#39;): 0.9085385801747908,
+ (&#39;mobilenet&#39;, &#39;vits&#39;): 0.9082581670327616,
+ (&#39;mobilenet&#39;, &#39;b4&#39;, &#39;vits&#39;): 0.9081646959854185,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;): 0.9081646959854185,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;b4&#39;): 0.9080712249380755,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;b3&#39;, &#39;vit_resnext&#39;): 0.9080244894144038,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;vits&#39;): 0.9079777538907323,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;b3&#39;): 0.9079310183670608,
+ (&#39;mobilenet&#39;, &#39;b3&#39;, &#39;vits&#39;): 0.9076973407487031,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;vit2019&#39;): 0.9076973407487031,
+ (&#39;mobilenet&#39;, &#39;b4&#39;, &#39;b3&#39;, &#39;vits&#39;): 0.90760386970136,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b3&#39;, &#39;vits&#39;): 0.9075571341776885,
+ (&#39;b5&#39;, &#39;mobilenet&#39;): 0.907510398654017,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;): 0.907510398654017,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;vits&#39;): 0.9074636631303453,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;vits&#39;): 0.9073234565593308,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;b3&#39;): 0.9073234565593308,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;vit2019&#39;): 0.9073234565593308,
+ (&#39;mobilenet&#39;, &#39;b3&#39;): 0.9072299855119876,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;vits&#39;): 0.9072299855119876,
+ (&#39;mobilenet&#39;, &#39;vit2020&#39;, &#39;b4&#39;): 0.9072299855119876,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;vits&#39;): 0.9072299855119876,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;vit_resnext&#39;): 0.9071832499883161,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;vit_resnext&#39;): 0.9071365144646446,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;b3&#39;, &#39;vits&#39;): 0.9071365144646446,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;vits&#39;): 0.90699630789363,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;vit2020&#39;, &#39;b4&#39;): 0.90699630789363,
+ (&#39;mobilenet&#39;, &#39;vit2020&#39;, &#39;b4&#39;, &#39;b3&#39;): 0.90699630789363,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;b3&#39;): 0.9069495723699584,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;vit2019&#39;): 0.9068561013226153,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;vit2020&#39;, &#39;b4&#39;): 0.9068561013226153,
+ (&#39;mobilenet&#39;, &#39;b4&#39;): 0.9068093657989438,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;vit2020&#39;): 0.9068093657989438,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;b3&#39;, &#39;vit_resnext&#39;): 0.9068093657989438,
+ (&#39;b5&#39;, &#39;mobilenet&#39;, &#39;vit2019&#39;, &#39;b3&#39;): 0.9067626302752723,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;b4&#39;, &#39;b3&#39;, &#39;vits&#39;): 0.9067158947516006,
+ (&#39;resnext&#39;, &#39;b5&#39;, &#39;mobilenet&#39;, &#39;vit2020&#39;, &#39;b3&#39;): 0.9066691592279291,
+ (&#39;resnext&#39;, &#39;mobilenet&#39;, &#39;vit2020&#39;, &#39;b4&#39;, &#39;b3&#39;): 0.9066691592279291,
+ (&#39;mobilenet&#39;, &#39;b4&#39;, &#39;vit2019&#39;, &#39;b3&#39;): 0.9066224237042576,
+ (&#39;mobilenet&#39;, &#39;b4&#39;, &#39;vit2019&#39;, &#39;vit_resnext&#39;): 0.9066224237042576}
+</code></pre></div>
+<h1 id="differential-evolution">Differential Evolution</h1>
+<p>Another technique that we also used to obtain good and stable results in the rankings was a prior optimization of the weights of the softmax logits of each model. For optimization we used the <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html">Scipy differential_evolution</a> method .</p>
+<div class="highlight"><pre><span></span><code><span class="n">considered_models</span> <span class="o">=</span> <span class="n">oof_predictions_v3</span><span class="p">[[</span><span class="s2">&quot;image_id&quot;</span><span class="p">,</span><span class="s2">&quot;label&quot;</span><span class="p">,</span><span class="s2">&quot;b4&quot;</span><span class="p">,</span><span class="s2">&quot;vit2020&quot;</span><span class="p">,</span><span class="s2">&quot;resnext&quot;</span><span class="p">,</span><span class="s2">&quot;mobilenet&quot;</span><span class="p">]]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">kfold</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">yhats</span> <span class="o">=</span> <span class="n">considered_models</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">considered_models</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">values</span>
+<span class="n">n_models</span> <span class="o">=</span> <span class="n">yhats</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">accuracy</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fold</span><span class="p">,</span> <span class="p">(</span><span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kfold</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">yhats</span><span class="p">,</span> <span class="n">y</span><span class="p">)):</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">fold</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="o">/</span><span class="n">n_models</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_models</span><span class="p">)])</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_models</span><span class="p">)]</span>
+    <span class="n">minimizeargs</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">yhats</span><span class="p">,</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">y_true</span> <span class="o">==</span> <span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">loss_func</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">Yhat</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">weights</span> <span class="o">*</span> <span class="n">Yhat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">calculate_accuracy</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">w</span><span class="p">)))</span>
+
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">differential_evolution</span><span class="p">(</span><span class="n">loss_func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">minimizeargs</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+
+    <span class="c1"># Calculate oof accuracy of optimized weights</span>
+    <span class="n">oof_accuracy</span> <span class="o">=</span> <span class="n">calculate_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+                                      <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+                                          <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">yhats</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">oof_accuracy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">accuracy</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">oof_accuracy</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#weights for ensembles of four different models</span>
+<span class="n">accuracy</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../../assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.1e84347e.min.js"></script>
+      
+        <script src="../../../../javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

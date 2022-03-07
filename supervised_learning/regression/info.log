@@ -1,0 +1,132 @@
+2021-11-09 20:26:31,041 - None
+2021-11-09 20:27:05,996 - Index(['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors',
+       'waterfront', 'view', 'condition', 'grade', 'sqft_above',
+       'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long',
+       'sqft_living15', 'sqft_lot15'],
+      dtype='object')
+2021-11-09 20:27:54,317 - 
+Index(['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors',
+       'waterfront', 'view', 'condition', 'grade', 'sqft_above',
+       'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long',
+       'sqft_living15', 'sqft_lot15'],
+      dtype='object')
+2021-11-09 20:27:59,486 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09 20:28:16,616 - SSS
+2021-11-09 20:28:40,654 - SSS
+2021-11-09 20:30:14,570 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09 20:30:27,224 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+21/Nov/2021 20:30:27 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09 20:30:34,929 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+21/Nov/2021 20:30:34 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09 20:30:48,580 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+21/Nov/2021 20:30:48 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09 20:30:48,580 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09 20:31:00,135 - SS
+21/Nov/2021 20:31:00 - SS
+2021-11-09 20:31:00,135 - SS
+2021-11-09 20:31:12,880 - SS
+21/Nov/2021 20:31:12 - SS
+2021-11-09 20:31:12,880 - SS
+2021-11-09 20:31:12,880 - SS
+2021-11-09,20:32:36 - SS
+2021-11-09,20:32:38 - 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09,20:33:03 - 
+The predictor columns are 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09,20:33:46 - 
+The predictor columns are 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09,20:34:08 - 
+The predictor columns are 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-09,20:35:29 - 
+Shape of train: (17290, 18)
+Shape of test: (4323, 18)
+2021-11-09,21:58:54 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,21:59:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,21:59:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute r2!
+2021-11-09,22:00:24 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:00:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:55 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:56 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:58 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:01:59 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:01 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:02 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:02 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:02 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:02 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:02 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:02 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:03 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:03 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:03 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:03 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-09,22:02:03 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:44 - 
+The predictor columns are 
+['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 'zipcode', 'lat', 'long', 'sqft_living15', 'sqft_lot15']
+2021-11-10,12:09:44 - 
+Shape of train: (17290, 18)
+Shape of test: (4323, 18)
+2021-11-10,12:09:44 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:44 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:44 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:44 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:44 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:45 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:46 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:48 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:49 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:50 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:52 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:53 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:09:53 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:18:58 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:19:12 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:19:12 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:19:12 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:19:12 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:19:12 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!
+2021-11-10,12:19:12 - <module 'sklearn.metrics._regression' from 'C:\\Users\\reighns\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\sklearn\\metrics\\_regression.py'> has no such attribute root_mean_squared_error!

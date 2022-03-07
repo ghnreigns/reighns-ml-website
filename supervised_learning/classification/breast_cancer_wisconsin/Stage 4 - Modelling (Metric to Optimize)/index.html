@@ -1,0 +1,1194 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://ghnreigns.github.io/reighns-ml-journey/supervised_learning/classification/breast_cancer_wisconsin/Stage%204%20-%20Modelling%20%28Metric%20to%20Optimize%29/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.5">
+    
+    
+      
+        <title>Modelling (Metrics) - Hongnan G. Machine Learning Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.cdeb8541.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../../css/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#define-metrics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Hongnan G. Machine Learning Projects" class="md-header__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hongnan G. Machine Learning Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Modelling (Metrics)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Hongnan G. Machine Learning Projects" class="md-nav__button md-logo" aria-label="Hongnan G. Machine Learning Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Hongnan G. Machine Learning Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../getting_started/" class="md-nav__link">
+        Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../git.md" class="md-nav__link">
+        git
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../misc/gcp/" class="md-nav__link">
+        GCP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Machine Learning" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Supervised Learning Theory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Supervised Learning Theory" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Supervised Learning Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        Regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2" type="checkbox" id="__nav_5_1_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2">
+          Classification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Classification" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1" type="checkbox" id="__nav_5_1_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1">
+          Projects
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projects" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Projects
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2_1_1" type="checkbox" id="__nav_5_1_2_1_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_2_1_1">
+          Breast Cancer Wisconsin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Breast Cancer Wisconsin" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_1_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Breast Cancer Wisconsin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%200%20-%20Introduction%20and%20Problem%20Statement/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%201%20-%20Preliminary%20Data%20Inspection%20and%20Cleaning/" class="md-nav__link">
+        Preliminary Data Inspection and Cleaning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%202%20-%20Preliminary%20EDA/" class="md-nav__link">
+        EDA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%203%20-%20Feature%20Engineering/" class="md-nav__link">
+        Feature Engineering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Modelling (Metrics)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Modelling (Metrics)
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#define-metrics" class="md-nav__link">
+    Define Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proper-scoring-rule" class="md-nav__link">
+    Proper Scoring Rule
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiver-operating-characteristic-roc" class="md-nav__link">
+    Receiver operating characteristic (ROC)
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver operating characteristic (ROC)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threshold-invariant" class="md-nav__link">
+    Threshold Invariant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-invariant" class="md-nav__link">
+    Scale Invariant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    Common Pitfalls
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#brier-score" class="md-nav__link">
+    Brier Score
+  </a>
+  
+    <nav class="md-nav" aria-label="Brier Score">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#well-calibrated" class="md-nav__link">
+    Well Calibrated
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brier-score-loss" class="md-nav__link">
+    Brier Score Loss
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-pitfalls_1" class="md-nav__link">
+    Common Pitfalls
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%205%20-%20Modelling%20%28Cross-Validation%20Methodology%29/" class="md-nav__link">
+        Modelling (Cross-Validation Schema)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%206%20-%20Modelling%20%28Preprocessing%20and%20Spot%20Checking%29/" class="md-nav__link">
+        Modelling (Preprocessing and Spot Checking)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%207%20-%20Modelling%20%28Model%20Selection%20and%20Hyperparameter%20Tuning%29/" class="md-nav__link">
+        Modelling (Model Selection)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stage%208%20-%20Modelling%20%28Model%20Evaluation%20and%20Interpretation%29/" class="md-nav__link">
+        Modelling (Model Evaluation)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Deep Learning with PyTorch
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Deep Learning with PyTorch" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Deep Learning with PyTorch
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1">
+          Computer Vision
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Computer Vision" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Computer Vision
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1_1" type="checkbox" id="__nav_6_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1_1">
+          General
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="General" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          General
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../deep_learning/computer_vision/general/image_normalization/Image_Normalization_and_Standardization.md" class="md-nav__link">
+        Image Normalization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../deep_learning/computer_vision/general/visualizing_convolutional_filters/Visualizing%20Convolutional%20Filters/" class="md-nav__link">
+        Visualizing Convolutional Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../deep_learning/computer_vision/general/freeze_layers/freezing_layers/" class="md-nav__link">
+        How to freeze Batch Norm Layers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#define-metrics" class="md-nav__link">
+    Define Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proper-scoring-rule" class="md-nav__link">
+    Proper Scoring Rule
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiver-operating-characteristic-roc" class="md-nav__link">
+    Receiver operating characteristic (ROC)
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver operating characteristic (ROC)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threshold-invariant" class="md-nav__link">
+    Threshold Invariant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-invariant" class="md-nav__link">
+    Scale Invariant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    Common Pitfalls
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#brier-score" class="md-nav__link">
+    Brier Score
+  </a>
+  
+    <nav class="md-nav" aria-label="Brier Score">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#well-calibrated" class="md-nav__link">
+    Well Calibrated
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brier-score-loss" class="md-nav__link">
+    Brier Score Loss
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-pitfalls_1" class="md-nav__link">
+    Common Pitfalls
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <div align="center">
+<h1>Stage 4: Modelling (Metrics)</a></h1>
+by Hongnan Gao
+<br>
+</div>
+
+<h2 id="define-metrics">Define Metrics</h2>
+<p><strong>Disclaimer: For a more detailed understanding of different metrics, do navigate to my self-made notes on metrics <a href="https://ghnreigns.github.io/reighns-ml-website/metrics/classification_metrics/classification_metrics/">here</a>.</strong></p>
+<hr />
+<p>Choosing a metric to measure the classifier's (hypothesis) performance is important, as choosing the wrong one can lead to disastrous interpretations. One prime example is using the accuracy metric for imbalanced datasets; consider 1 mil data points, dichotomized by <span class="arithmatex">\(99\%\)</span> benign and <span class="arithmatex">\(1\%\)</span> malignant samples, even a baseline model zeroR model which predicts the majority class no matter the process will give a <span class="arithmatex">\(99\%\)</span> accuracy, completely missing out any positive samples, which unfortunately, is what we may be more interested in.</p>
+<hr />
+<div class="alert alert-block alert-danger">
+<b>Say No to Accuracy:</b> Consider an imbalanced set, where the training data set has 100 patients (data points), and the ground truth is 90 patients are of class = 0, which means that these patients do not have cancer, whereas the remaining 10 patients are in class 1, where they do have cancer. This is an example of class imbalance where the ratio of class 1 to class 0 is 1:9.
+</div>
+
+<p>Consider <strong>a baseline (almost trivial) classifier</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">zeroR</span><span class="p">(</span><span class="n">patient_data</span><span class="p">):</span>
+        <span class="n">training</span><span class="o">...</span>
+    <span class="k">return</span> <span class="n">benign</span>
+</code></pre></div>
+<p>where we predict the patient's class as the most frequent class. Meaning, the most frequent class in this question is the class = 0, where patients do not have cancer, so we just assign this class to everyone in this set. By doing this, we will inevitably achieve a <strong>in-sample</strong> accuracy rate of <span class="arithmatex">\(\frac{90}{100} = 90\%\)</span>. But unfortunately, this supposedly high accuracy value is completely useless, because this classifier did not label any of the cancer patients correctly.</p>
+<p>The consequence can be serious, assuming the test set has the same distribution as our training set, where if we have a test set of 1000 patients, there are 900 negative and 100 positive. Our model just literally predict every one of them as benign, yielding a <span class="arithmatex">\(90\%\)</span> <strong>out-of-sample</strong> accuracy.</p>
+<p>What did we conclude? Well, for one, our <code>accuracy</code> can be 90% high and looks good to the laymen, but it failed to predict the most important class of people - yes, misclassifying true cancer patients as healthy people is very bad! </p>
+<hr />
+<p>For the reasons mentioned above, we will use metric that can help us reduce False Negatives, and at the same time, outputs meaningful predictions. In order to achieve for both, we will use <strong>Receiver operating characteristic (ROC)</strong> as the primary metric for the model to maximize (which is our <span class="arithmatex">\(\mathcal{M}\)</span>, and <strong>Brier Score</strong>, a <a href="https://en.wikipedia.org/wiki/Scoring_rule">proper scoring rule</a> to measure the performance of our probabilistic predictions. We will go into some details in the next two subsections to justify our choice.</p>
+<h2 id="proper-scoring-rule">Proper Scoring Rule</h2>
+<p>The math behind the idea of Proper Scoring Rule is non-trivial. Here, we try to understand why a proper scoring rule is desired in the context of binary classification.</p>
+<hr />
+<div class="alert alert-success" role="alert">
+<li> <b>Strictly Proper Scoring Rule:</b> Brier Score Loss, for example, tells us that the best possible score, 0 (lowest loss), is obtained if and only if, the probability prediction we get for a sample, is the true probability itself. In other words, if a selected sample is of class 1, our prediction for this must be 1, with 100% probability, in order to get a score loss of 0.
+
+<li> <b>Proper Scoring Rule:</b> Read [here](https://stats.stackexchange.com/questions/339919/what-does-it-mean-that-auc-is-a-semi-proper-scoring-rule) for this.
+
+<li> <b>Semi Proper Scoring Rule:</b> AUROC, as mentioned, does not help out in telling whether a prediction by a classifier is close to the true probability or not. In our example, we even see that we can obtain a full score of 1, even if the probabilities all lie within 0.51 and 0.52.
+
+<li> <b>Improper Scoring Rule:</b> Accuracy is a prime example, the accuracy score does not, whatsoever, tells us about how close our predicted probabilities are, to the true probability distribution of our samples.
+</div>
+
+<h2 id="receiver-operating-characteristic-roc">Receiver operating characteristic (ROC)</h2>
+<div class="alert alert-success" role="alert">
+    <b>Definition:</b> The basic (non-probablistic intepretation) of ROC is graph that plots the True Positive Rate on the y-axis and False Positive Rate on the x-axis parametrized by a threshold vector $\vec{t}$. We then look at the area under the ROC curve (AUROC) to get an overall performance measure.
+</div>
+
+<hr />
+<p>The choice of ROC over other metrics such as Accuracy is detailed initially. <strong>We also established we want to reduce False Negative (FN), since misclassifying a positive patient as benign is way more costly than the other way round.</strong> One can choose to minimize <strong>Recall</strong> in order to reduce FN, but this is less than ideal during training because it is a thresholded metric, and does not provide at which threshold the recall is at minimum. This leads us to choose ROC for the following two main reasons:</p>
+<h3 id="threshold-invariant">Threshold Invariant</h3>
+<p>By definition, ROC computes the pair <span class="arithmatex">\(TPR \times FPR\)</span> over all thresholds <span class="arithmatex">\(t\)</span>, consequently, the AUROC is threshold invariant, allowing us to look at the model's performance over all thresholds. We note that ROC may not be that reliable in the case of very imbalanced datasets where majority is in the negative class, as <span class="arithmatex">\(FPR = \dfrac{FP}{FP+TN}\)</span> may seem deceptively low as denominator may be made small by the sheer amount of TN, in this case, we may also look at the Precision-Recall curve.</p>
+<h3 id="scale-invariant">Scale Invariant</h3>
+<p>Technically, this is not the desired property that we need, as this means that the ROC is non-proper in scoring, it can take in non-calibrated scores and still perform relatively well. A classic example I always use is the following:</p>
+<div class="highlight"><pre><span></span><code><span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.52</span><span class="p">,</span><span class="mf">0.51</span><span class="p">,</span><span class="mf">0.52</span><span class="p">,</span><span class="mf">0.51</span><span class="p">]</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">52</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">51</span><span class="p">]</span>
+<span class="n">uncalibrated_roc</span> <span class="o">=</span> <span class="n">roc</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span> <span class="o">==</span> <span class="n">roc</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span><span class="n">y3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">uncalibrated_roc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mf">1.0</span>
+</code></pre></div>
+<p>The example tells us two things, as long as the ranking of predictions is preserved, the final AUROC score is the same, regardless of scale. We also notice that even though the model gives very unconfident predictions, the AUROC score is 1, which can be misleadingly over-optimistic. With that, we introduce Brier Score.</p>
+<h3 id="common-pitfalls">Common Pitfalls</h3>
+<div class="alert alert-block alert-danger">
+<b>Careful when using ROC function!</b>   
+
+We also note that when passing arguments to scikit-learn's <code>roc_auc_score</code> function, we should be careful not to pass <code>y_score=model.predict(X)</code> inside as we have to understand that we are passing in <b>non-thresholded</b> probabilities into <code>y_score</code>. If you pass the predicted values (full of 0 and 1s), then you are thresholding on 0 and 1 only, which is incorrect by definition. 
+</div>
+
+<h2 id="brier-score">Brier Score</h2>
+<div class="alert alert-success" role="alert">
+    <b>Definition:</b> Brier Score computes the squared difference between the probability of a prediction and its actual outcome. 
+</div>
+
+<hr />
+<p><a href="https://en.wikipedia.org/wiki/Brier_score">Brier Score</a> is a strictly proper scoring rule while ROC is <a href="https://www.fharrell.com/post/class-damage/">not</a>; the lower the Brier Score, the better the predictions are calibrated. We can first compute the AUROC score of the model, and compute Brier Score to give us how well calibrated (confident) the predictions are.</p>
+<h3 id="well-calibrated">Well Calibrated</h3>
+<p>A intuitive way of understanding well calibrated probabilities is as follows, extracted from <a href="https://blog.cambridgespark.com/probability-calibration-c7252ac123f">cambridge's probability calibration</a>:</p>
+<blockquote>
+<p>In very simple terms, these are probabilities which can be interpreted as a confidence interval. Furthermore, a classifier is said to produce well calibrated probabilities if for the instances (data points) receiving probability 0.5, 50% of those instances belongs to the positive class.</p>
+</blockquote>
+<hr />
+<p>In my own words, if a classifier is well calibrated, say in our context where we predict binary target, and pretend that out of our test set, 100 of the samples have a probability of around 0.1, then this means 10% of these 100 samples actually belong to the positive class.</p>
+<p>The generic steps are as follows to calculate a calibrated plot:</p>
+<ol>
+<li>Sort all the samples by the classifier's predicted probabilities, in either ascending or descending order.</li>
+<li>Bin your diagram into N bins, usually we take 10, which means on the X-axis, note this does not mean we have 0-0.1, 0.1-0.2, ..., 0.9-1 as the 10 bins.</li>
+<li>What step 2 means is let's say you have 100 predictions, if you bin by 10 bins, and since the predictions are <strong><em>sorted</em></strong>, we can easily divide the 100 predictions into 10 intervals: for illustration, assume the 100 predictions are as follows, where we sort by ascending order and the prediction 0.1 has 10 of them, 0.2 have 10 of them, so on and so forth.
+    <div class="highlight"><pre><span></span><code><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">.....</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">..</span><span class="mf">.1</span><span class="p">]</span>
+</code></pre></div></li>
+<li>Since we can divide the above into 10 bins, bin 1 will have 10 samples of predictions 0.1, bin 2 will have 10 samples of predictions 0.2, etc. We then take the mean of the <strong>predictions of each bin</strong>, that is for the first bin, we calculate <span class="arithmatex">\(\dfrac{1}{10}\sum_{i=1}^{10}0.1 = 0.1\)</span>, and second bin, <span class="arithmatex">\(\dfrac{1}{10}\sum_{i=1}^{10}0.2 = 0.2\)</span>. Note that this may not be such a nice number in reality, I made this example for the ease of illustration!</li>
+<li>Now, we have our X-axis from step 4, that is, we turned 10 bins, into 10 numbers, 0.1, 0.2, 0.3, ..., 1, and then we need to find the corresponding points for each of the 10 numbers! This is easy, for 0.1, the corresponding y-axis is just the <strong>fraction of positives</strong>, which means, out of the 10 samples in the first bin, how many of these 10 samples were actually positive? We do this for all 10 bins (points), and plot a line graph as seen in scikit-learn.  </li>
+</ol>
+<hr />
+<p>Now this should be apparent now that a well calibrated model should lie close to the <span class="arithmatex">\(y = x\)</span> line. That is, if the mean predicted probability is 0.1, then the y-axis should also be 0.1, meaning to say that out of all the samples that were predicted as 0.1, we should really only have about 10% of them being positive. The same logic applies to the rest!</p>
+<hr />
+<h3 id="brier-score-loss">Brier Score Loss</h3>
+<p>Brier Score Loss is a handy metric to measure whether a classifier is well calibrated, as quoted from <a href="https://scikit-learn.org/stable/modules/calibration.html">scikit-learn</a>:</p>
+<blockquote>
+<p>Brier Score Loss may be used to assess how well a classifier is calibrated. However, this metric should be used with care because a lower Brier score does not always mean a better calibrated model. This is because the Brier score metric is a combination of calibration loss and refinement loss. Calibration loss is defined as the mean squared deviation from empirical probabilities derived from the slope of ROC segments. Refinement loss can be defined as the expected optimal loss as measured by the area under the optimal cost curve. As refinement loss can change independently from calibration loss, a lower Brier score does not necessarily mean a better calibrated model.</p>
+</blockquote>
+<h3 id="common-pitfalls_1">Common Pitfalls</h3>
+<div class="alert alert-block alert-danger">
+<b>Class Imbalance:</b> The good ol' class imbalance issue almost always pop up anywhere and everywhere. Intuitively, if we have a super rare positive/negative class, then if the model is very confident in its predictions for the majority class, but not so confident on the rare class, the overall Brier Score Loss may not be sufficient in discriminating the classifier's inability in correctly classifying the minority class.
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../Stage%203%20-%20Feature%20Engineering/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Feature Engineering" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Feature Engineering
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Stage%205%20-%20Modelling%20%28Cross-Validation%20Methodology%29/" class="md-footer__link md-footer__link--next" aria-label="Next: Modelling (Cross-Validation Schema)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Modelling (Cross-Validation Schema)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../../assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.1e84347e.min.js"></script>
+      
+        <script src="../../../../javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
